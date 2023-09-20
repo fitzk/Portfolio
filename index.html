@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="./favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-		
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="./favicon.png" />
+	<meta name="viewport" content="width=device-width" />
+	
+		<link href="./_app/immutable/assets/0.bb968886.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/2.f2aa07cc.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.2e65ff87.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3cd1373c.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.e108d1fd.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.5273b949.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.4b290bd0.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.7cf2deec.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.658d7c8e.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.d136fb5f.js">
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">  <canvas id="mainCanvas" class="svelte-x419b3"></canvas> 
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.67206eb7.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.ae8eae92.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.0127b290.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.aaba837c.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.9fbaad42.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.acd16595.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/three.module.0b80e6e0.js">
+</head>
+<body data-sveltekit-preload-data="hover">
+	<div style="display: contents"> <nav class="svelte-1d9njw1" data-svelte-h="svelte-4hkjcz"><a href="/Portfolio" class="svelte-1d9njw1">home</a> <a href="/Portfolio/threejs/basics" class="svelte-1d9njw1">threejs basics</a></nav> <div id="inProgressBanner" class="svelte-1d9njw1" data-svelte-h="svelte-1xm8ubc"><p>Kayla&#39;s Portfolio - IN PROGRESS</p></div> <canvas id="mainCanvas" class="svelte-x419b3"></canvas> 
 			
 			<script>
 				{
-					__sveltekit_tqy3lo = {
+					__sveltekit_ih0q2d = {
 						assets: "/Portfolio",
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
@@ -30,8 +33,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.2e65ff87.js"),
-						import("./_app/immutable/entry/app.4b290bd0.js")
+						import("./_app/immutable/entry/start.3cd1373c.js"),
+						import("./_app/immutable/entry/app.0127b290.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
@@ -43,5 +46,14 @@
 				}
 			</script>
 		</div>
-	</body>
+</body>
+<style>
+	body {
+		margin: 0;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		box-sizing: border-box;
+		background-color: black;
+		color: white;
+	}
+</style>
 </html>
