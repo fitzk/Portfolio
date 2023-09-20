@@ -23,7 +23,7 @@
     #inProgressBanner {
         font-size: 1.2rem;
         margin: 0;
-        padding-bottom: 1em;
+        padding: 1em;
     }
 
     nav {
