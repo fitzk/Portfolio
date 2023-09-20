@@ -1,68 +1,87 @@
 <script lang="ts">
-    
     import * as THREE from "three";
     import { onMount } from "svelte";
     import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+    function addCelestialObject(
+        scene: THREE.Scene,
+        color: number,
+        radius: number,
+        spread: number
+    ) {
+        const geometry = new THREE.SphereGeometry(radius, 64, 64);
+        const material = new THREE.MeshStandardMaterial({ color });
+        const celestialBody = new THREE.Mesh(geometry, material);
+        const [x, y, z] = Array(3)
+            .fill(0)
+            .map(() => THREE.MathUtils.randFloatSpread(spread));
+
+        celestialBody.position.set(x, y, z);
+        scene.add(celestialBody);
+
+        // we will return each celestialBody eventually to
+        // animate orbit around the star
+    }
+
+    // window is only available on mount due to ssr
     onMount(() => {
-        const canvas = document.getElementById("mainCanvas");
+        // colors
+        const white = 0xffffff;
+        const sun = 0xe6dcb2;
+        // colors - planets
+        const blue = 0x00ffff;
+        const red = 0x0ff0000;
+        const green = 0x40e0d0;
+
+        // setup renderer, camera, and scene
+        const canvas = document.getElementById("mainCanvas") ?? undefined;
 
         const renderer = new THREE.WebGLRenderer({
             canvas,
         });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(
             75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            1000
+            window.innerWidth / window.innerHeight
         );
+        camera.position.setZ(10);
 
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.setZ(30);
+        const geometry = new THREE.SphereGeometry(2, 60, 60);
 
-        const geometry = new THREE.SphereGeometry(10, 64, 64);
         const material = new THREE.MeshBasicMaterial({
             color: 0xe6dcb2,
-            // wireframe: true,
         });
-
-        const white = 0xffffff;
 
         const sphere = new THREE.Mesh(geometry, material);
         scene.add(sphere);
 
-        const ambientLight = new THREE.AmbientLight(0xffffff);
-
-        const gridHelper = new THREE.GridHelper(200, 50);
-
+        const ambientLight = new THREE.AmbientLight(white);
         scene.add(ambientLight);
-        scene.add(gridHelper);
 
         const controls = new OrbitControls(camera, renderer.domElement);
 
-        function addStar() {
-            const geometry = new THREE.SphereGeometry(0.15, 10, 10);
-            const material = new THREE.MeshStandardMaterial({ color: white });
-            const star = new THREE.Mesh(geometry, material);
-            const [x, y, z] = Array(3)
-                .fill(0)
-                .map(() => THREE.MathUtils.randFloatSpread(100));
-
-            star.position.set(x, y, z);
-            scene.add(star);
-        }
-
-        Array(300).fill(0).forEach(addStar);
+        // stars
+        Array(300)
+            .fill(0)
+            .forEach(() => addCelestialObject(scene, sun, 0.15, 400));
+        // blue planets
+        Array(4)
+            .fill(0)
+            .forEach(() => addCelestialObject(scene, blue, 0.25, 50));
+        // red planets
+        Array(3)
+            .fill(0)
+            .forEach(() => addCelestialObject(scene, red, 0.25, 50));
+        // green planets
+        Array(2)
+            .fill(0)
+            .forEach(() => addCelestialObject(scene, green, 0.5, 50));
 
         function animate() {
             requestAnimationFrame(animate);
-
-            // slowly rotate sphere
-            sphere.rotation.x += 0.0005;
-            // sphere.rotation.y += 0.01;
             controls.update();
             renderer.render(scene, camera);
         }
