@@ -5,6 +5,7 @@
 <nav>
     <a href={base}>home</a>
     <a href="{base}/threejs/basics"> threejs basics</a>
+    <!-- <a href="{base}/threejs/animation"> threejs animation</a> -->
 </nav>
 
 <div id="inProgressBanner">
