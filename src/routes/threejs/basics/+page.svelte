@@ -174,7 +174,7 @@
 ```
 <canvas id="basicsTransformRedCube" />
 
-### Three cubes
+### Group three cubes & rotate group on y axis
 ```js
 
 // helper - draws a colored cube
@@ -211,5 +211,6 @@ group.rotation.y = 1; // rotate group on y axis
 
 <canvas id="basicsTransformThreeCubes" />
 
-
-
+references & inspiration
+1. https://threejs.org/examples
+2. https://threejs-journey.com

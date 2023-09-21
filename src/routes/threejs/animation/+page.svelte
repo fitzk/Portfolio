@@ -43,3 +43,7 @@
 
 ## Animations
 <canvas id='animateCube'/>
+
+references & inspiration
+1. https://threejs.org/examples
+2. https://threejs-journey.com
