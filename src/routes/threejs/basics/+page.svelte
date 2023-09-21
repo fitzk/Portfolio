@@ -117,10 +117,48 @@
         renderer.render(scene, camera);
     }
 
+      // examples
+  function examplesAnimateCube() {
+    const height = window.innerHeight / 2;
+    const width = window.innerWidth / 2;
+
+    const scene = new THREE.Scene();
+
+    const cube = drawCube(colors.lightGreen);
+    scene.add(cube);
+
+    // axis helper
+    const axisHelper = new THREE.AxesHelper(4);
+    scene.add(axisHelper);
+
+    // camera
+    const camera = new THREE.PerspectiveCamera(75, width / height);
+    camera.position.z = 4; // move camera in front of cube by moving camera along z access
+    scene.add(camera);
+
+    // renderer
+    const renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById("animateCube") ?? undefined,
+    });
+    renderer.setSize(width, height);
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      const elapsedTime = clock.getElapsedTime();
+      cube.rotation.y = elapsedTime;
+      renderer.render(scene, camera);
+      window.requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
     onMount(() => {
         examplesBasicsDrawCube();
         examplesBasicsTransformCube();
         examplesBasicsTransformThreeCubes();
+        examplesAnimateCube();
     });
 </script>
 
@@ -174,7 +212,7 @@ Axis helper also shown in example
 ```js
 // draw single cube (same as prev example)
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.Me dshBasicMaterial({ color: 0x8CD790 });
+const material = new THREE.MeshBasicMaterial({ color: 0x8CD790 });
 const mesh = new THREE.Mesh(geometry, material);
 mesh.position.set(2, 1, 0);
 mesh.scale.set(1, 0.5, 0.5);
@@ -219,6 +257,31 @@ group.rotation.y = 1; // rotate group on y axis
 ```
 
 <canvas id="basicsTransformThreeCubes" />
+</div>
+
+
+## Animation
+Ensure animation is the same speed regardless of viewer's computer FPS
+
+### Animate Single Cube Rotation
+<div class='example'>
+<!-- \n after comment required for markdown parsing -->
+ 
+
+```js
+
+const clock = new THREE.Clock();
+
+function animate() {
+  const elapsedTime = clock.getElapsedTime();
+  cube.rotation.y = elapsedTime;
+  renderer.render(scene, camera);
+  window.requestAnimationFrame(animate);
+}
+
+animate();
+```
+<canvas id="animateCube" />
 </div>
 
 references & inspiration

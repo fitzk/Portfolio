@@ -41,10 +41,12 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      75,
+      65,
       window.innerWidth / window.innerHeight,
+      1,
+      100,
     );
-    camera.position.setZ(10);
+    camera.position.setZ(20);
 
     const geometry = new THREE.SphereGeometry(3, 60, 60);
 
@@ -53,6 +55,7 @@
     });
 
     const sphere = new THREE.Mesh(geometry, material);
+    sphere.position.y = 4;
     scene.add(sphere);
 
     const ambientLight = new THREE.AmbientLight(white);
