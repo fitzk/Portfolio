@@ -5,8 +5,9 @@
   import * as colors from "$lib/colors";
 
   // examples
-  function animateCube() {
+  function examplesAnimateCube() {
     const height = window.innerHeight / 2;
+    const width = window.innerWidth / 2;
 
     const scene = new THREE.Scene();
 
@@ -21,7 +22,7 @@
 
     // camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / height);
-    camera.position.z = 3; // move camera in front of cube by moving camera along z access
+    camera.position.z = 4; // move camera in front of cube by moving camera along z access
     scene.add(camera);
 
     // renderer
