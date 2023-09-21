@@ -1,44 +1,45 @@
 <script>
-    import { base } from "$app/paths";
+  import { base } from "$app/paths";
+  import * as colors from "$lib/colors";
 </script>
 
-<nav>
-    <a href={base}>home</a>
+<div>
+  <nav style="background-color:{colors.toHex(colors.black)}">
+    <a href="{base}/">home</a>
     <a href="{base}/threejs/basics"> threejs basics</a>
     <!-- <a href="{base}/threejs/animation"> threejs animation</a> -->
-</nav>
-
+  </nav>
+</div>
 <div id="inProgressBanner">
-    <p>Kayla's Portfolio - IN PROGRESS</p>
+  <p>Kayla's Portfolio - IN PROGRESS</p>
 </div>
 
-<div id='content'>
-    <slot />
+<div id="content">
+  <slot />
 </div>
 
-<style>
-    #content {
-        padding: 1.5em;
-    }
+<style global>
+  #content {
+    padding: 1em;
+  }
 
-    #inProgressBanner {
-        font-size: 1.2rem;
-        margin: 0;
-        padding: 1em;
-    }
+  #inProgressBanner {
+    margin: 0;
+    padding: 1em;
+  }
 
-    nav {
-        align-items: center;
-        background-color: blueviolet;
-        display: flex;
-        justify-content: flex-end;
-        padding: 0.5em;
-    }
+  nav {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2em;
+  }
 
-    nav a {
-        color: white;
-        font-size: 1.2rem;
-        margin-right: 1em;
-        text-decoration: none;
-    }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1em;
+    text-decoration: none;
+    flex-grow: 0;
+  }
 </style>

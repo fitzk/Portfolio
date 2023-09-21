@@ -1,4 +1,3 @@
-
 # Kayla's Portfolio
 
 IN PROGRESS
