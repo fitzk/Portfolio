@@ -224,27 +224,3 @@ group.rotation.y = 1; // rotate group on y axis
 references & inspiration
 1. https://threejs.org/examples
 2. https://threejs-journey.com
-
-
-<style>
-    canvas {
-        margin-bottom: 0;
-    }
-
-    .example {
-        display: flex;
-        flex-flow: row;
-        justify-content: space-between;
-    }
-
-    /* stack on small screens */
-    @media only screen and (max-width:750px) {
-        .example {
-            flex-wrap: wrap-reverse;
-        }
-
-        canvas {
-            min-width: fit-content;
-        }
-    }
-</style>

@@ -60,7 +60,6 @@
 
     const controls = new OrbitControls(camera, renderer.domElement);
 
-
     const planets = new THREE.Group();
     scene.add(planets);
 

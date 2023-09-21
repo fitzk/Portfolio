@@ -31,7 +31,7 @@
     renderer.setSize(width, height);
     renderer.render(scene, camera);
 
-    const clock = new THREE.Clock()
+    const clock = new THREE.Clock();
 
     function animate() {
       const elapsedTime = clock.getElapsedTime();
@@ -48,24 +48,8 @@
   });
 </script>
 
-## Animation
-Ensure animation is the same speed regardless of viewer's computer FPS
+## Cameras ## Animate Single Cube ```js ```
+<canvas id="camera" />
 
-## Animate Single Cube
-```js
-const clock = new THREE.Clock()
-
-function animate() {
-  const elapsedTime = clock.getElapsedTime();
-  cube.rotation.y = elapsedTime;
-  renderer.render(scene, camera);
-  window.requestAnimationFrame(animate);
-}
-
-animate();
-```
-<canvas id="animateCube" />
-
-references & inspiration 
-1. https://threejs.org/examples
-2. https://threejs-journey.com
+references & inspiration 1. https://threejs.org/examples 2.
+https://threejs-journey.com
