@@ -31,7 +31,7 @@
     renderer.setSize(width, height);
     renderer.render(scene, camera);
 
-    const clock = new THREE.Clock()
+    const clock = new THREE.Clock();
 
     function animate() {
       const elapsedTime = clock.getElapsedTime();
@@ -53,7 +53,7 @@ Ensure animation is the same speed regardless of viewer's computer FPS
 
 ## Animate Single Cube
 ```js
-const clock = new THREE.Clock()
+const clock = new THREE.Clock();
 
 function animate() {
   const elapsedTime = clock.getElapsedTime();
