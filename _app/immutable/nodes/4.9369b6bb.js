@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<link rel="icon" href="../favicon.png" />
-	<meta name="viewport" content="width=device-width" />
-	
-		<link href="../_app/immutable/assets/0.4207f432.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.5bba1f01.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/scheduler.e108d1fd.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.9181621b.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/paths.638f633e.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.a4de1f83.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/index.aaba837c.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.80e7af0d.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/4.9369b6bb.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/three.module.9f7d1369.js">
-</head>
-<body data-sveltekit-preload-data="hover">
-	<div style="display: contents"> <nav class="svelte-1y9k0r" data-svelte-h="svelte-prhspc"><a href="/Portfolio" class="svelte-1y9k0r">home</a> <a href="/Portfolio/threejs/basics" class="svelte-1y9k0r">threejs basics</a> </nav> <div id="inProgressBanner" class="svelte-1y9k0r" data-svelte-h="svelte-1xm8ubc"><p>Kayla&#39;s Portfolio - IN PROGRESS</p></div> <div id="content" class="svelte-1y9k0r"><h2 data-svelte-h="svelte-14tpb38">Static Red Cube</h2> <pre class="language-html"><!-- HTML_TAG_START --><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>basicsStaticRedCube<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code><!-- HTML_TAG_END --></pre> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">
+import{s as cn,n as Y,o as un}from"../chunks/scheduler.e108d1fd.js";import{S as ln,i as kn,g as u,s as m,H as V,h as l,x as L,c as w,j as x,z as X,f as s,k as g,a as t}from"../chunks/index.aaba837c.js";import{C as rn,g as J,B as K,f as O,c as Z,d as $,W as D,i as pn,G as dn}from"../chunks/three.module.9f7d1369.js";function F(){const T=new rn(16777215);return T.setHex(Math.random()*16777215),new J(new K(1,1,1),new O({color:T}))}function mn(T){let i,M="Static Red Cube",H,o,e,k='<code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>basicsStaticRedCube<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code>',f,p,c,r=`<code class="language-js">
     <span class="token keyword">const</span> scene <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Scene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment">// red cube</span>
@@ -38,7 +19,7 @@
 
     renderer<span class="token punctuation">.</span><span class="token function">setSize</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>innerWidth<span class="token punctuation">,</span> window<span class="token punctuation">.</span>innerHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
     renderer<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>scene<span class="token punctuation">,</span> camera<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code><!-- HTML_TAG_END --></pre> <canvas id="basicsStaticRedCube"></canvas> <hr> <h2 data-svelte-h="svelte-192pvy4">Transform Cubes</h2> <h3 data-svelte-h="svelte-lxgqvz">Rotate &amp; reposition red cube</h3> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">    <span class="token comment">// red cube (same as prev example)</span>
+</code>`,d,h,S,B,z,b,Q="Transform Cubes",P,y,U="Rotate & reposition red cube",W,C,A,en=`<code class="language-js">    <span class="token comment">// red cube (same as prev example)</span>
     <span class="token keyword">const</span> geometry <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>BoxGeometry</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">const</span> material <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>MeshBasicMaterial</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token number">0xff0000</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">const</span> mesh <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Mesh</span><span class="token punctuation">(</span>geometry<span class="token punctuation">,</span> material<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -51,7 +32,7 @@
 
     <span class="token comment">// axis helper</span>
     <span class="token keyword">const</span> axisHelper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>AxesHelper</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>axisHelper<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformRedCube"></canvas> <h3 data-svelte-h="svelte-z6e5ec">Three cubes</h3> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">
+    scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>axisHelper<span class="token punctuation">)</span><span class="token punctuation">;</span></code>`,G,R,I,E,nn="Three cubes",j,v,q,on=`<code class="language-js">
 <span class="token comment">// helper - draws a colored cube</span>
 <span class="token keyword">function</span> <span class="token function">drawCube</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">const</span> color <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Color</span><span class="token punctuation">(</span> <span class="token number">0xffffff</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -81,42 +62,4 @@ thirdCube<span class="token punctuation">.</span>position<span class="token punc
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>firstCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>secondCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>thirdCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
-group<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// rotate group on y axis</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformThreeCubes"></canvas></div> 
-			
-			<script>
-				{
-					__sveltekit_tetwn1 = {
-						assets: "/Portfolio",
-						base: new URL("..", location).pathname.slice(0, -1),
-						env: {}
-					};
-
-					const element = document.currentScript.parentElement;
-
-					const data = [null,null];
-
-					Promise.all([
-						import("../_app/immutable/entry/start.5bba1f01.js"),
-						import("../_app/immutable/entry/app.a4de1f83.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element, {
-							node_ids: [0, 4],
-							data,
-							form: null,
-							error: null
-						});
-					});
-				}
-			</script>
-		</div>
-</body>
-<style>
-	body {
-		background-color: black;
-		box-sizing: border-box;
-		color: white;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-		margin: 0;
-	}
-</style>
-</html>
+group<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// rotate group on y axis</span></code>`,N,_;return{c(){i=u("h2"),i.textContent=M,H=m(),o=u("pre"),e=new V(!1),f=m(),p=u("pre"),c=new V(!1),d=m(),h=u("canvas"),S=m(),B=u("hr"),z=m(),b=u("h2"),b.textContent=Q,P=m(),y=u("h3"),y.textContent=U,W=m(),C=u("pre"),A=new V(!1),G=m(),R=u("canvas"),I=m(),E=u("h3"),E.textContent=nn,j=m(),v=u("pre"),q=new V(!1),N=m(),_=u("canvas"),this.h()},l(n){i=l(n,"H2",{"data-svelte-h":!0}),L(i)!=="svelte-14tpb38"&&(i.textContent=M),H=w(n),o=l(n,"PRE",{class:!0});var a=x(o);e=X(a,!1),a.forEach(s),f=w(n),p=l(n,"PRE",{class:!0});var sn=x(p);c=X(sn,!1),sn.forEach(s),d=w(n),h=l(n,"CANVAS",{id:!0}),x(h).forEach(s),S=w(n),B=l(n,"HR",{}),z=w(n),b=l(n,"H2",{"data-svelte-h":!0}),L(b)!=="svelte-192pvy4"&&(b.textContent=Q),P=w(n),y=l(n,"H3",{"data-svelte-h":!0}),L(y)!=="svelte-lxgqvz"&&(y.textContent=U),W=w(n),C=l(n,"PRE",{class:!0});var an=x(C);A=X(an,!1),an.forEach(s),G=w(n),R=l(n,"CANVAS",{id:!0}),x(R).forEach(s),I=w(n),E=l(n,"H3",{"data-svelte-h":!0}),L(E)!=="svelte-z6e5ec"&&(E.textContent=nn),j=w(n),v=l(n,"PRE",{class:!0});var tn=x(v);q=X(tn,!1),tn.forEach(s),N=w(n),_=l(n,"CANVAS",{id:!0}),x(_).forEach(s),this.h()},h(){e.a=null,g(o,"class","language-html"),c.a=null,g(p,"class","language-js"),g(h,"id","basicsStaticRedCube"),A.a=null,g(C,"class","language-js"),g(R,"id","basicsTransformRedCube"),q.a=null,g(v,"class","language-js"),g(_,"id","basicsTransformThreeCubes")},m(n,a){t(n,i,a),t(n,H,a),t(n,o,a),e.m(k,o),t(n,f,a),t(n,p,a),c.m(r,p),t(n,d,a),t(n,h,a),t(n,S,a),t(n,B,a),t(n,z,a),t(n,b,a),t(n,P,a),t(n,y,a),t(n,W,a),t(n,C,a),A.m(en,C),t(n,G,a),t(n,R,a),t(n,I,a),t(n,E,a),t(n,j,a),t(n,v,a),q.m(on,v),t(n,N,a),t(n,_,a)},p:Y,i:Y,o:Y,d(n){n&&(s(i),s(H),s(o),s(f),s(p),s(d),s(h),s(S),s(B),s(z),s(b),s(P),s(y),s(W),s(C),s(G),s(R),s(I),s(E),s(j),s(v),s(N),s(_))}}}function wn(T){function i(){const o=window.innerHeight/2,e=new Z,k=new K(1,1,1),f=new O({color:16711680}),p=new J(k,f);e.add(p);const c=new $(75,window.innerWidth/o);c.position.z=3,e.add(c);const r=new D({canvas:document.getElementById("basicsStaticRedCube")??void 0});r.setSize(window.innerWidth,o),r.render(e,c)}function M(){const o=window.innerHeight/2,e=new Z,k=new K(1,1,1),f=new O({color:16711680}),p=new J(k,f);p.position.set(2,1,0),p.scale.set(1,.5,.5),p.rotation.reorder("YXZ"),p.rotation.y=Math.PI,p.rotation.x=Math.PI,e.add(p);const c=new pn(4);e.add(c);const r=new $(75,window.innerWidth/o);r.position.z=3,r.lookAt(p.position),e.add(r);const d=new D({canvas:document.getElementById("basicsTransformRedCube")??void 0});d.setSize(window.innerWidth,o),d.render(e,r)}function H(){const o=window.innerHeight/2,e=new Z,k=new dn;e.add(k);const f=F(),p=F(),c=F();p.position.x=-2,c.position.x=2,k.add(f),k.add(p),k.add(c),k.rotation.y=1;const r=new pn(4);e.add(r);const d=new $(75,window.innerWidth/o);d.position.z=3,e.add(d);const h=new D({canvas:document.getElementById("basicsTransformThreeCubes")??void 0});h.setSize(window.innerWidth,o),h.render(e,d)}return un(()=>{i(),M(),H()}),[]}class yn extends ln{constructor(i){super(),kn(this,i,wn,mn,cn,{})}}export{yn as component};
