@@ -6,14 +6,14 @@
 	<meta name="viewport" content="width=device-width" />
 	
 		<link href="../_app/immutable/assets/0.4207f432.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.5bba1f01.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.df6c49e3.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/scheduler.e108d1fd.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.9181621b.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/paths.638f633e.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.a4de1f83.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.bf78cfbf.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/paths.1fbb4c4e.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.7b890d7a.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/index.aaba837c.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.80e7af0d.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/4.9369b6bb.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.87ba4f4d.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/4.f2a03c6d.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/three.module.9f7d1369.js">
 </head>
 <body data-sveltekit-preload-data="hover">
@@ -51,7 +51,7 @@
 
     <span class="token comment">// axis helper</span>
     <span class="token keyword">const</span> axisHelper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>AxesHelper</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>axisHelper<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformRedCube"></canvas> <h3 data-svelte-h="svelte-z6e5ec">Three cubes</h3> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">
+    scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>axisHelper<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformRedCube"></canvas> <h3 data-svelte-h="svelte-1a06yqe">Group three cubes &amp; rotate group on y axis</h3> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">
 <span class="token comment">// helper - draws a colored cube</span>
 <span class="token keyword">function</span> <span class="token function">drawCube</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">const</span> color <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Color</span><span class="token punctuation">(</span> <span class="token number">0xffffff</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -81,11 +81,11 @@ thirdCube<span class="token punctuation">.</span>position<span class="token punc
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>firstCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>secondCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>thirdCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
-group<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// rotate group on y axis</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformThreeCubes"></canvas></div> 
+group<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// rotate group on y axis</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformThreeCubes"></canvas> <p data-svelte-h="svelte-h27kpk">references &amp; inspiration</p> <ol data-svelte-h="svelte-p3thy0"><li><a href="https://threejs.org/examples" rel="nofollow">https://threejs.org/examples</a></li> <li><a href="https://threejs-journey.com" rel="nofollow">https://threejs-journey.com</a></li></ol></div> 
 			
 			<script>
 				{
-					__sveltekit_tetwn1 = {
+					__sveltekit_wi4187 = {
 						assets: "/Portfolio",
 						base: new URL("..", location).pathname.slice(0, -1),
 						env: {}
@@ -96,8 +96,8 @@ group<span class="token punctuation">.</span>rotation<span class="token punctuat
 					const data = [null,null];
 
 					Promise.all([
-						import("../_app/immutable/entry/start.5bba1f01.js"),
-						import("../_app/immutable/entry/app.a4de1f83.js")
+						import("../_app/immutable/entry/start.df6c49e3.js"),
+						import("../_app/immutable/entry/app.7b890d7a.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 4],
