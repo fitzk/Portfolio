@@ -1,31 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="../favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-funky.min.css"
-      rel="stylesheet"
-    />
-    
-		<link href="../_app/immutable/assets/0.8be4cb32.css" rel="stylesheet">
-		<link href="../_app/immutable/assets/4.d02803fd.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.8f336ae6.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/scheduler.e108d1fd.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.d50de6da.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/paths.2b0ce24a.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.c155a6f6.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/index.aaba837c.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.458b3008.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/colors.687c7ab1.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/4.329de89e.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/three.module.78ce4e85.js">
-  </head>
-
-  <body data-sveltekit-preload-data="hover">
-    <div style="display: contents"> <div data-svelte-h="svelte-1t39r4o"><nav style="background-color:#0" class="svelte-1wxq4yi"><a href="/Portfolio/" class="svelte-1wxq4yi">home</a> <a href="/Portfolio/threejs/basics" class="svelte-1wxq4yi">threejs basics</a> </nav></div> <div id="inProgressBanner" class="svelte-1wxq4yi" data-svelte-h="svelte-1txl20o"><p>Kayla&#39;s Portfolio - IN PROGRESS</p></div> <div id="content" class="svelte-1wxq4yi"><h2 data-svelte-h="svelte-1tax6m4">Draw a Cube</h2> <div class="example svelte-13ogr7a"><span> <p data-svelte-h="svelte-4hgumj">html</p> <pre class="language-html"><!-- HTML_TAG_START --><code class="language-html"><span class="token comment">&lt;!-- create canvas element --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>basicsDrawCube<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code><!-- HTML_TAG_END --></pre> <p data-svelte-h="svelte-1wj58xl">javascript</p> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// javascript</span>
+import{s as In,n as un,o as zn}from"../chunks/scheduler.e108d1fd.js";import{S as Gn,i as Vn,g as t,s as r,H as tn,h as e,x as b,c as k,j as h,z as en,f as s,k as d,a as p,y as i}from"../chunks/index.aaba837c.js";import{g as hn,B as fn,f as vn,c as rn,d as kn,W as mn,i as Bn,G as Wn}from"../chunks/three.module.78ce4e85.js";import{l as dn,j as Ln,a as Nn}from"../chunks/colors.687c7ab1.js";function wn(L){return new hn(new fn(1,1,1),new vn({color:L}))}function qn(L){let f,N="Draw a Cube",S,u,o,c,w="html",C,l,m,v=`<code class="language-html"><span class="token comment">&lt;!-- create canvas element --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>basicsDrawCube<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code>`,x,y,xn="javascript",pn,A,q,Sn=`<code class="language-js"><span class="token comment">// javascript</span>
 <span class="token keyword">const</span> scene <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Scene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// draw a cube</span>
@@ -45,7 +19,7 @@ scene<span class="token punctuation">.</span><span class="token function">add</s
     <span class="token literal-property property">canvas</span><span class="token operator">:</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"basicsDrawCube"</span><span class="token punctuation">)</span> <span class="token operator">??</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 renderer<span class="token punctuation">.</span><span class="token function">setSize</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span>
-renderer<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>scene<span class="token punctuation">,</span> camera<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre></span> <canvas id="basicsDrawCube" class="svelte-13ogr7a"></canvas></div> <h2 data-svelte-h="svelte-192pvy4">Transform Cubes</h2> <p data-svelte-h="svelte-1sk11jw">Axis helper also shown in example</p> <h3 data-svelte-h="svelte-18388pi">Rotate &amp; Reposition Single Cube</h3> <div class="example svelte-13ogr7a"><span> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// draw single cube (same as prev example)</span>
+renderer<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>scene<span class="token punctuation">,</span> camera<span class="token punctuation">)</span><span class="token punctuation">;</span></code>`,on,D,F,H,bn="Transform Cubes",X,T,Cn="Axis helper also shown in example",Y,j,yn="Rotate & Reposition Single Cube",Z,g,W,I,$,An=`<code class="language-js"><span class="token comment">// draw single cube (same as prev example)</span>
 <span class="token keyword">const</span> geometry <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>BoxGeometry</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> material <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Me</span> <span class="token function">dshBasicMaterial</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token number">0x8CD790</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> mesh <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Mesh</span><span class="token punctuation">(</span>geometry<span class="token punctuation">,</span> material<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -60,7 +34,7 @@ scene<span class="token punctuation">.</span><span class="token function">add</s
 
 <span class="token comment">// axis helper</span>
 <span class="token keyword">const</span> axisHelper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>AxesHelper</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>axisHelper<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre></span> <canvas id="basicsTransformCube" class="svelte-13ogr7a"></canvas></div> <h3 data-svelte-h="svelte-1j6wysp">Group Three Cubes &amp; Rotate on y Axis</h3> <p data-svelte-h="svelte-dmkqlg">Draw three cubes, this example uses a helper function refer to previous examples for how to draw a cube</p> <div class="example svelte-13ogr7a"> <pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">
+scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>axisHelper<span class="token punctuation">)</span><span class="token punctuation">;</span></code>`,cn,z,O,R,gn="Group Three Cubes & Rotate on y Axis",J,P,_n="Draw three cubes, this example uses a helper function refer to previous examples for how to draw a cube",K,_,G,Q,Dn=`<code class="language-js">
 <span class="token comment">// transformations</span>
 <span class="token keyword">const</span> group <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Group</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>group<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -76,50 +50,4 @@ thirdCube<span class="token punctuation">.</span>position<span class="token punc
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>firstCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>secondCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
 group<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>thirdCube<span class="token punctuation">)</span><span class="token punctuation">;</span>
-group<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// rotate group on y axis</span></code><!-- HTML_TAG_END --></pre> <canvas id="basicsTransformThreeCubes" class="svelte-13ogr7a"></canvas></div> <p data-svelte-h="svelte-h27kpk">references &amp; inspiration</p> <ol data-svelte-h="svelte-p3thy0"><li><a href="https://threejs.org/examples" rel="nofollow">https://threejs.org/examples</a></li> <li><a href="https://threejs-journey.com" rel="nofollow">https://threejs-journey.com</a></li></ol></div> 
-			
-			<script>
-				{
-					__sveltekit_1ibted6 = {
-						assets: "/Portfolio",
-						base: new URL("..", location).pathname.slice(0, -1),
-						env: {}
-					};
-
-					const element = document.currentScript.parentElement;
-
-					const data = [null,null];
-
-					Promise.all([
-						import("../_app/immutable/entry/start.8f336ae6.js"),
-						import("../_app/immutable/entry/app.c155a6f6.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element, {
-							node_ids: [0, 4],
-							data,
-							form: null,
-							error: null
-						});
-					});
-				}
-			</script>
-		</div>
-  </body>
-  <style global>
-    html {
-      min-width: fit-content;
-    }
-
-    body {
-      background-color: black;
-      color: white;
-      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-        sans-serif;
-      margin: 0;
-    }
-
-    code {
-      font-size: 0.8rem !important;
-    }
-  </style>
-</html>
+group<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// rotate group on y axis</span></code>`,ln,V,U,M,En="references & inspiration",nn,B,Hn='<li><a href="https://threejs.org/examples" rel="nofollow">https://threejs.org/examples</a></li> <li><a href="https://threejs-journey.com" rel="nofollow">https://threejs-journey.com</a></li>';return{c(){f=t("h2"),f.textContent=N,S=r(),u=t("div"),o=t("span"),c=t("p"),c.textContent=w,C=r(),l=t("pre"),m=new tn(!1),x=r(),y=t("p"),y.textContent=xn,pn=r(),A=t("pre"),q=new tn(!1),on=r(),D=t("canvas"),F=r(),H=t("h2"),H.textContent=bn,X=r(),T=t("p"),T.textContent=Cn,Y=r(),j=t("h3"),j.textContent=yn,Z=r(),g=t("div"),W=t("span"),I=t("pre"),$=new tn(!1),cn=r(),z=t("canvas"),O=r(),R=t("h3"),R.textContent=gn,J=r(),P=t("p"),P.textContent=_n,K=r(),_=t("div"),G=t("pre"),Q=new tn(!1),ln=r(),V=t("canvas"),U=r(),M=t("p"),M.textContent=En,nn=r(),B=t("ol"),B.innerHTML=Hn,this.h()},l(n){f=e(n,"H2",{"data-svelte-h":!0}),b(f)!=="svelte-1tax6m4"&&(f.textContent=N),S=k(n),u=e(n,"DIV",{class:!0});var a=h(u);o=e(a,"SPAN",{});var E=h(o);c=e(E,"P",{"data-svelte-h":!0}),b(c)!=="svelte-4hgumj"&&(c.textContent=w),C=k(E),l=e(E,"PRE",{class:!0});var Tn=h(l);m=en(Tn,!1),Tn.forEach(s),x=k(E),y=e(E,"P",{"data-svelte-h":!0}),b(y)!=="svelte-1wj58xl"&&(y.textContent=xn),pn=k(E),A=e(E,"PRE",{class:!0});var jn=h(A);q=en(jn,!1),jn.forEach(s),E.forEach(s),on=k(a),D=e(a,"CANVAS",{id:!0,class:!0}),h(D).forEach(s),a.forEach(s),F=k(n),H=e(n,"H2",{"data-svelte-h":!0}),b(H)!=="svelte-192pvy4"&&(H.textContent=bn),X=k(n),T=e(n,"P",{"data-svelte-h":!0}),b(T)!=="svelte-1sk11jw"&&(T.textContent=Cn),Y=k(n),j=e(n,"H3",{"data-svelte-h":!0}),b(j)!=="svelte-18388pi"&&(j.textContent=yn),Z=k(n),g=e(n,"DIV",{class:!0});var sn=h(g);W=e(sn,"SPAN",{});var Rn=h(W);I=e(Rn,"PRE",{class:!0});var Pn=h(I);$=en(Pn,!1),Pn.forEach(s),Rn.forEach(s),cn=k(sn),z=e(sn,"CANVAS",{id:!0,class:!0}),h(z).forEach(s),sn.forEach(s),O=k(n),R=e(n,"H3",{"data-svelte-h":!0}),b(R)!=="svelte-1j6wysp"&&(R.textContent=gn),J=k(n),P=e(n,"P",{"data-svelte-h":!0}),b(P)!=="svelte-dmkqlg"&&(P.textContent=_n),K=k(n),_=e(n,"DIV",{class:!0});var an=h(_);G=e(an,"PRE",{class:!0});var Mn=h(G);Q=en(Mn,!1),Mn.forEach(s),ln=k(an),V=e(an,"CANVAS",{id:!0,class:!0}),h(V).forEach(s),an.forEach(s),U=k(n),M=e(n,"P",{"data-svelte-h":!0}),b(M)!=="svelte-h27kpk"&&(M.textContent=En),nn=k(n),B=e(n,"OL",{"data-svelte-h":!0}),b(B)!=="svelte-p3thy0"&&(B.innerHTML=Hn),this.h()},h(){m.a=null,d(l,"class","language-html"),q.a=null,d(A,"class","language-js"),d(D,"id","basicsDrawCube"),d(D,"class","svelte-13ogr7a"),d(u,"class","example svelte-13ogr7a"),$.a=null,d(I,"class","language-js"),d(z,"id","basicsTransformCube"),d(z,"class","svelte-13ogr7a"),d(g,"class","example svelte-13ogr7a"),Q.a=null,d(G,"class","language-js"),d(V,"id","basicsTransformThreeCubes"),d(V,"class","svelte-13ogr7a"),d(_,"class","example svelte-13ogr7a")},m(n,a){p(n,f,a),p(n,S,a),p(n,u,a),i(u,o),i(o,c),i(o,C),i(o,l),m.m(v,l),i(o,x),i(o,y),i(o,pn),i(o,A),q.m(Sn,A),i(u,on),i(u,D),p(n,F,a),p(n,H,a),p(n,X,a),p(n,T,a),p(n,Y,a),p(n,j,a),p(n,Z,a),p(n,g,a),i(g,W),i(W,I),$.m(An,I),i(g,cn),i(g,z),p(n,O,a),p(n,R,a),p(n,J,a),p(n,P,a),p(n,K,a),p(n,_,a),i(_,G),Q.m(Dn,G),i(_,ln),i(_,V),p(n,U,a),p(n,M,a),p(n,nn,a),p(n,B,a)},p:un,i:un,o:un,d(n){n&&(s(f),s(S),s(u),s(F),s(H),s(X),s(T),s(Y),s(j),s(Z),s(g),s(O),s(R),s(J),s(P),s(K),s(_),s(U),s(M),s(nn),s(B))}}}function Fn(L){function f(){const u=window.innerHeight/2,o=window.innerWidth/2,c=new rn,w=new fn(1,1,1),C=new vn({color:dn}),l=new hn(w,C);c.add(l);const m=new kn(75,o/u);m.position.z=4,c.add(m);const v=new mn({canvas:document.getElementById("basicsDrawCube")??void 0});v.setSize(o,u),v.render(c,m)}function N(){const u=window.innerHeight/2,o=window.innerWidth/2,c=new rn,w=new fn(1,1,1),C=new vn({color:dn}),l=new hn(w,C);l.position.set(2,1,0),l.scale.set(1,.5,.5),l.rotation.reorder("YXZ"),l.rotation.y=Math.PI,l.rotation.x=Math.PI,c.add(l);const m=new Bn(4);c.add(m);const v=new kn(75,o/u);v.position.z=4,v.lookAt(l.position),c.add(v);const x=new mn({canvas:document.getElementById("basicsTransformCube")??void 0});x.setSize(o,u),x.render(c,v)}function S(){const u=window.innerHeight/2,o=window.innerWidth/2,c=new rn,w=new Wn;c.add(w);const C=wn(Ln),l=wn(dn),m=wn(Nn);l.position.x=-2,m.position.x=2,w.add(C),w.add(l),w.add(m),w.rotation.y=1;const v=new Bn(5);c.add(v);const x=new kn(75,o/u);x.position.z=4,c.add(x);const y=new mn({canvas:document.getElementById("basicsTransformThreeCubes")??void 0});y.setSize(o,u),y.render(c,x)}return zn(()=>{f(),N(),S()}),[]}class On extends Gn{constructor(f){super(),Vn(this,f,Fn,qn,In,{})}}export{On as component};
