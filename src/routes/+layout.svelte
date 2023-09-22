@@ -6,7 +6,7 @@
 <nav style="background-color:{colors.toHex(colors.black)}">
   <a href="{base}/">home</a>
   <a href="{base}/threejs/basics">threejs basics</a>
-  <!-- <a href="{base}/threejs/house"> house </a>  -->
+  <!-- <a href="{base}/threejs/desert">desert</a> -->
 </nav>
 
 <div id="inProgressBanner">

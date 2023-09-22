@@ -15,8 +15,8 @@
     const axisHelper = new THREE.AxesHelper(4);
     scene.add(axisHelper);
 
-    const house = new THREE.Group();
-    scene.add(house);
+    const ground = new THREE.Group();
+    scene.add(ground);
 
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(crackedEarth);
@@ -26,11 +26,12 @@
         map: texture,
       }),
     );
-    house.add(plane);
+    ground.add(plane);
 
-    const walls = new THREE.Mesh(new THREE.BoxGeometry(2, 2));
-    walls.position.z = 0.5;
-    house.add(walls);
+    // make cactus group
+    const cactusMainColumn = new THREE.Mesh(new THREE.BoxGeometry(1, 5), new THREE.MeshBasicMaterial({ color: 'darkgreen'}));
+    cactusMainColumn.position.z = 1;
+    ground.add(cactusMainColumn);
   
     // camera
     const camera = new THREE.PerspectiveCamera(75, width / height, 1, 100);
