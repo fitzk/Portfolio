@@ -8,7 +8,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "deploy": "vite build && npx gh-pages -d build -t true",
     "dev": "vite dev",
-    "format": "prettier --write  --plugin prettier-plugin-svelte .",
+    "format": "prettier --write --plugin prettier-plugin-svelte .",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -27,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "lil-gui": "^0.18.2",
     "three": "^0.156.1"
   }
 }

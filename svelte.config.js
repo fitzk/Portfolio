@@ -5,10 +5,10 @@ import { mdsvex } from "mdsvex";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: [
-    vitePreprocess(),
     mdsvex({
-      extensions: [".md", ".svelte"],
+      extensions: [".svelte"],
     }),
+    vitePreprocess()
   ],
   kit: {
     adapter: adapter(),
@@ -16,7 +16,7 @@ const config = {
       base: process.env.NODE_ENV === "production" ? "/Portfolio" : "",
     },
   },
-  extensions: [".svelte", ".md"],
+  extensions: [".svelte"],
 };
 
 export default config;

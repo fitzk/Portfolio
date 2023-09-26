@@ -11,6 +11,7 @@
 
     const scene = new THREE.Scene();
 
+
     // axis helper
     const axisHelper = new THREE.AxesHelper(4);
     scene.add(axisHelper);
@@ -26,13 +27,23 @@
         map: texture,
       }),
     );
+
+
     ground.add(plane);
 
     // make cactus group
-    const cactusMainColumn = new THREE.Mesh(new THREE.BoxGeometry(1, 5), new THREE.MeshBasicMaterial({ color: 'darkgreen'}));
+    const cactusMainColumn = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 5),
+      new THREE.MeshBasicMaterial({ color: "darkgreen" }),
+    );
     cactusMainColumn.position.z = 1;
     ground.add(cactusMainColumn);
-  
+
+    const sun = new THREE.Mesh(
+      new THREE.SphereGeometry(0.5, 64, 64),
+      new THREE.MeshBasicMaterial({ color: colors.white }),
+    );
+    scene.add(sun);
     // camera
     const camera = new THREE.PerspectiveCamera(75, width / height, 1, 100);
     camera.position.z = 8; // move camera in front of cube by moving camera along z access
@@ -47,7 +58,7 @@
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("house") ?? undefined,
+      canvas: document.getElementById("desert") ?? undefined,
     });
 
     renderer.setSize(width, height);
@@ -57,6 +68,7 @@
     function animate() {
       controls.update();
       renderer.render(scene, camera);
+   
       window.requestAnimationFrame(animate);
     }
 
@@ -64,7 +76,7 @@
   });
 </script>
 
-<canvas id="house" />
+<canvas id="desert" />
 
 references & inspiration 1. https://threejs.org/examples 2.
 https://threejs-journey.com

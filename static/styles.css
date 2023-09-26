@@ -41,12 +41,6 @@ nav a {
   padding: 1em;
 }
 
-.example {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
-
 /* stack on small screens */
 @media only screen and (max-width: 750px) {
   .example {
