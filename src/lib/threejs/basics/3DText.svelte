@@ -19,6 +19,7 @@
     // camera
     const camera = new THREE.PerspectiveCamera(50, width / height);
     camera.position.z = 5; // move camera in front of cube by moving camera along z access
+    camera.position.y = -1;
     scene.add(camera);
 
     // renderer
@@ -36,7 +37,7 @@
       bevelThickness: 0.2,
       curveSegments: 12,
       font: new Font(typeface),
-      height: 0.1,
+      height: 0.1, // extrusion depth
       size: 0.6,
     });
     textGeometry.center();
