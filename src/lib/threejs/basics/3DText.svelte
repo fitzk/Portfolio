@@ -19,7 +19,7 @@
     // camera
     const camera = new THREE.PerspectiveCamera(50, width / height);
     camera.position.z = 5; // move camera in front of cube by moving camera along z access
-    camera.position.y = -1;
+    camera.position.y = -2;
     scene.add(camera);
 
     // renderer
@@ -32,13 +32,13 @@
     const textGeometry = new TextGeometry("Kayla's Portfolio", {
       bevelEnabled: true,
       bevelOffset: 0,
-      bevelSegments: 5,
-      bevelSize: 0.02,
-      bevelThickness: 0.2,
-      curveSegments: 12,
+      bevelSegments: 4,
+      bevelSize: 0.04,
+      bevelThickness: 0.04,
+      curveSegments: 24,
       font: new Font(typeface),
-      height: 0.1, // extrusion depth
-      size: 0.6,
+      height: 0.3, // extrusion depth
+      size: 0.8,
     });
     textGeometry.center();
 
