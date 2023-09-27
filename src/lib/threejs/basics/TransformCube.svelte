@@ -3,6 +3,7 @@
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
+  // @ts-ignore it's markdown
   import ExampleMarkdown from "./TransformCube.md";
 
   onMount(() => {

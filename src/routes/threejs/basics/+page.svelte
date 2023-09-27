@@ -10,7 +10,7 @@
 # Threejs Basics
 <DrawCube />
 
-## Transform Cubes Axis helper also shown in example
+## Transform Cubes
 <TransformCube />
 <TransformThreeCubes />
 
@@ -23,5 +23,6 @@
 ## 3D Text
 <ThreeDimensionText />
 
-references & inspiration 1. https://threejs.org/examples 2.
-https://threejs-journey.com
+references & inspiration 
+1. https://threejs.org/examples
+2. https://threejs-journey.com
