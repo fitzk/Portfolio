@@ -1,12 +1,20 @@
-html {
-  min-width: fit-content;
+h1 {
+  color: mediumspringgreen;
+}
+
+h2 {
+  color: cornflowerblue;
+}
+
+h3 {
+  color: khaki;
 }
 
 body {
   background-color: black;
-  color: white;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   margin: 0;
+  color: white;
 }
 
 code {
@@ -30,6 +38,16 @@ nav a {
   margin-right: 1em;
   text-decoration: none;
   flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+a {
+  color: darkgray;
+}
+
+a:visited {
+  color: cornflowerblue;
 }
 
 #content {
@@ -39,12 +57,6 @@ nav a {
 #inProgressBanner {
   margin: 0;
   padding: 1em;
-}
-
-.example {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
 }
 
 /* stack on small screens */
