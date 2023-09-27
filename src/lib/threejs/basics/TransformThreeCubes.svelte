@@ -4,6 +4,8 @@
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
+  // @ts-ignore it's a markdown file
+  import ExampleMarkdown from "./TransformThreeCubes.md";
 
   onMount(() => {
     const height = window.innerHeight / 2;
@@ -44,27 +46,9 @@
   });
 </script>
 
-### Group Three Cubes & Rotate on y Axis 
-This example uses a helper function to draw cubes refer to previous examples for how to draw a cube
+### Group Three Cubes & Rotate on y Axis
+
 <Example>
-
-```js
-// transformations
-const group = new THREE.Group();
-scene.add(group);
-
-const firstCube = drawCube(0x98B9F2);
-const secondCube = drawCube(0x8CD790);
-const thirdCube = drawCube(0x918EF4);
-
-// move two of the cubes so they do not overlap
-secondCube.position.x = -2; 
-thirdCube.position.x = 2;
-
-group.add(firstCube);
-group.add(secondCube);
-group.add(thirdCube);
-group.rotation.y = 1; // rotate group on y axis
-```
+  <ExampleMarkdown />
   <canvas id="transformThreeCubes" slot="live" />
 </Example>

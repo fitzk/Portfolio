@@ -4,8 +4,8 @@
 ```ts
 import { Font } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
-import matcap from "$lib/assets/matcap.png";
-import typeface from "$lib/assets/Yellowtail_Regular.json";
+import matcap from "../assets/matcap.png";
+import typeface from "../assets/your_typeface.json";
 
 // ...
 const textGeometry = new TextGeometry("Kayla's Portfolio", {

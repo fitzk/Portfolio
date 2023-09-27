@@ -13,12 +13,12 @@ scene.add(mesh);
 // camera
 const camera = new THREE.PerspectiveCamera(75, width / height);
 // move camera in front of cube by moving camera along z access
-camera.position.z = 4; 
+camera.position.z = 4;
 scene.add(camera);
 
 // renderer
 const renderer = new THREE.WebGLRenderer({
-    canvas
+  canvas,
 });
 renderer.setSize(width, height);
 renderer.render(scene, camera);

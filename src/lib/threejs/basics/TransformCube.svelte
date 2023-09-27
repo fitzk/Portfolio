@@ -3,7 +3,7 @@
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
-  import ExampleMarkdown from './TransformCube.md';
+  import ExampleMarkdown from "./TransformCube.md";
 
   onMount(() => {
     const height = window.innerHeight / 2;
@@ -47,6 +47,6 @@
 ### Rotate & Reposition Single Cube
 
 <Example>
-  <ExampleMarkdown/>
-  <canvas id='transformCube' slot='live'/>
+  <ExampleMarkdown />
+  <canvas id="transformCube" slot="live" />
 </Example>

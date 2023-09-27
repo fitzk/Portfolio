@@ -4,6 +4,8 @@
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
+  // @ts-ignore it's a markdown file
+  import ExampleMarkdown from "./AnimateCube.md";
 
   onMount(() => {
     const height = window.innerHeight / 2;
@@ -42,19 +44,7 @@
   });
 </script>
 
-
-Ensure animation is the same speed regardless of viewer's computer FPS
-
 <Example>
-
-```ts
-const clock = new THREE.Clock();
-
-const elapsedTime = clock.getElapsedTime();
-cube.rotation.y = elapsedTime;
-renderer.render(scene, camera);
-window.requestAnimationFrame(animate);
-
-```
-  <canvas id="animateCube" slot="live"></canvas>
+  <ExampleMarkdown />
+  <canvas id="animateCube" slot="live" />
 </Example>

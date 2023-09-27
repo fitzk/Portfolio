@@ -30,14 +30,14 @@
       new THREE.PlaneGeometry(10, 10),
       new THREE.MeshBasicMaterial({
         map: texture,
-      })
+      }),
     );
 
     ground.add(plane);
 
     const sun = new THREE.Mesh(
       new THREE.SphereGeometry(0.5, 64, 64),
-      new THREE.MeshBasicMaterial({ color: colors.white })
+      new THREE.MeshBasicMaterial({ color: colors.white }),
     );
     scene.add(sun);
     sun.position.y = 5;
