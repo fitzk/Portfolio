@@ -1,9 +1,8 @@
 <script>
   import { base } from "$app/paths";
-  import * as colors from "$lib/colors";
 </script>
 
-<nav style="background-color:{colors.toHex(colors.black)}">
+<nav>
   <a href="{base}/">home</a>
   <a href="{base}/threejs/basics">threejs basics</a>
   <a href="{base}/threejs/desert">desert</a>

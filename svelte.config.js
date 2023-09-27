@@ -6,7 +6,7 @@ import { mdsvex } from "mdsvex";
 const config = {
   preprocess: [
     mdsvex({
-      extensions: [".svelte"],
+      extensions: [".svelte", ".md"],
     }),
     vitePreprocess()
   ],
@@ -16,7 +16,7 @@ const config = {
       base: process.env.NODE_ENV === "production" ? "/Portfolio" : "",
     },
   },
-  extensions: [".svelte"],
+  extensions: [".svelte", ".md"],
 };
 
 export default config;

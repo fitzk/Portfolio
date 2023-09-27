@@ -4,6 +4,8 @@
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
+  // @ts-ignore it's a markdown file
+  import ExampleMarkdown from "./DrawCube.md";
 
   onMount(() => {
     // window is only available in onMount fn
@@ -36,28 +38,6 @@
 ## Draw a Cube
 
 <Example>
-
-```ts
-const scene = new THREE.Scene();
-
-// draw a cube
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
-
-// camera
-const camera = new THREE.PerspectiveCamera(75, width / height);
-// move camera in front of cube by moving camera along z access
-camera.position.z = 4; 
-scene.add(camera);
-
-// renderer
-const renderer = new THREE.WebGLRenderer({
-    canvas
-});
-renderer.setSize(width, height);
-renderer.render(scene, camera);
-```
-    <canvas id="drawCube" slot='live'></canvas>
+  <ExampleMarkdown />
+  <canvas id="drawCube" slot="live" />
 </Example>

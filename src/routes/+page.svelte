@@ -99,6 +99,5 @@
 <style>
   #mainCanvas {
     position: fixed;
-    margin: 0;
   }
 </style>
