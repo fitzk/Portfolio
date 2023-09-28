@@ -6,6 +6,7 @@
   <a href="{base}/">home</a>
   <a href="{base}/threejs/basics">threejs basics</a>
   <!-- <a href="{base}/threejs/desert">desert</a> -->
+  <a target="”_blank”" href="https://github.com/fitzk">github</a>
 </nav>
 
 <div id="inProgressBanner">

@@ -18,6 +18,7 @@
       .map(() => THREE.MathUtils.randFloatSpread(spread));
 
     celestialBody.position.set(x, y, z);
+    celestialBody.receiveShadow = true;
   }
 
   // window is only available on mount due to ssr
@@ -36,6 +37,8 @@
     const renderer = new THREE.WebGLRenderer({
       canvas,
     });
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -55,6 +58,8 @@
     });
 
     const sphere = new THREE.Mesh(geometry, material);
+    sphere.receiveShadow = true;
+    sphere.castShadow = true;
     sphere.position.y = 4;
     scene.add(sphere);
 

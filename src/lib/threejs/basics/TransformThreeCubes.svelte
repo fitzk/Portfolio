@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { drawCube } from "$lib/drawingHelpers";
+  import { drawCube, getCanvasDims } from "$lib/util";
   import { onMount } from "svelte";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
@@ -8,8 +8,7 @@
   import ExampleMarkdown from "./TransformThreeCubes.md";
 
   onMount(() => {
-    const height = window.innerHeight / 2;
-    const width = window.innerWidth / 2;
+    const { width, height } = getCanvasDims();
 
     const scene = new THREE.Scene();
 

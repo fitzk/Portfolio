@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 h1 {
   color: mediumspringgreen;
 }
@@ -15,6 +21,7 @@ body {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   margin: 0;
   color: white;
+  overflow-x: hidden;
 }
 
 code {
@@ -26,20 +33,16 @@ canvas {
 }
 
 nav {
-  align-items: center;
+  padding: 2em;
+  width: 100vw;
   display: flex;
   justify-content: flex-end;
-  padding: 2em;
 }
 
 nav a {
+  margin-right: 1em;
   color: white;
   text-decoration: none;
-  margin-right: 1em;
-  text-decoration: none;
-  flex-grow: 0;
-  flex-shrink: 0;
-  font-size: 1.2rem;
 }
 
 a {
@@ -57,15 +60,4 @@ a:visited {
 #inProgressBanner {
   margin: 0;
   padding: 1em;
-}
-
-/* stack on small screens */
-@media only screen and (max-width: 750px) {
-  .example {
-    flex-wrap: wrap-reverse;
-  }
-
-  canvas {
-    min-width: fit-content;
-  }
 }

@@ -6,12 +6,10 @@
   import Example from "$lib/threejs/Example.svelte";
   // @ts-ignore it's a markdown file
   import ExampleMarkdown from "./DrawCube.md";
+  import { getCanvasDims } from "$lib/util";
 
   onMount(() => {
-    // window is only available in onMount fn
-    const height = window.innerHeight / 2;
-    const width = window.innerWidth / 2;
-
+    const { width, height } = getCanvasDims();
     const scene = new THREE.Scene();
 
     // draw a cube
