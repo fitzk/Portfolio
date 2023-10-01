@@ -94,7 +94,7 @@
       .min(-5)
       .max(5)
       .step(1);
-
+    // directional light camera helper
     const directionalLightCameraHelper = new THREE.CameraHelper(
       directionalLight.shadow.camera,
     );

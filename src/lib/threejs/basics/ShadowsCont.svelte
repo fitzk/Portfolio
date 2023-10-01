@@ -26,9 +26,9 @@
 
     const sphere = new THREE.Mesh(
       new THREE.SphereGeometry(1),
-      new THREE.MeshStandardMaterial(),
+      new THREE.MeshStandardMaterial()
     );
-    sphere.position.y = 1;
+    // sphere.position.y = 2;
     scene.add(sphere);
 
     // axis helper
@@ -49,18 +49,19 @@
     const material = new THREE.MeshBasicMaterial({
       alphaMap: texture,
       transparent: true,
-      color: colors.bitterSweet,
+      color: colors.black,
     });
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), material);
-    plane.rotation.x = Math.PI * 1.5;
-    plane.position.z = 0.5;
-    scene.add(plane);
+    const sphereShadow = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), material);
+    sphereShadow.rotation.x = Math.PI * 1.5;
+    sphereShadow.position.z = 0.5;
+    sphereShadow.position.y = -0.5;
+    scene.add(sphereShadow);
 
     const basePlane = new THREE.Mesh(
       planeGeometry,
-      new THREE.MeshBasicMaterial(),
+      new THREE.MeshBasicMaterial()
     );
-    basePlane.position.z = -0.5;
+    basePlane.position.y = -1;
     basePlane.rotation.x = Math.PI * 1.5;
     scene.add(basePlane);
 
@@ -80,6 +81,7 @@
     // reduce amplitude
     directionalLight.shadow.camera.top = 3;
     scene.add(directionalLight);
+
     // directional light gui
     const directionalLightFolder = gui.addFolder("Directional Light");
     directionalLightFolder.addColor(directionalLight, "color");
@@ -104,8 +106,9 @@
       .max(5)
       .step(1);
 
+    // directional light helper
     const directionalLightCameraHelper = new THREE.CameraHelper(
-      directionalLight.shadow.camera,
+      directionalLight.shadow.camera
     );
     scene.add(directionalLightCameraHelper);
     directionalLightCameraHelper.visible = false;
@@ -115,7 +118,7 @@
       colors.spaceCadet,
       50, // intensity
       5, // distance
-      Math.PI * 0.3, // angle
+      Math.PI * 0.3 // angle
     );
     spotLight.position.set(0, 1, 2);
     scene.add(spotLight);
@@ -145,10 +148,23 @@
     renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
     const controls = new OrbitControls(camera, renderer.domElement);
+    const clock = new THREE.Clock();
 
     function animate() {
       controls.update();
       renderer.render(scene, camera);
+      const elapsedTime = clock.getElapsedTime();
+
+      // Update the sphere
+      sphere.position.x = Math.cos(elapsedTime) * 1.5;
+      sphere.position.z = Math.sin(elapsedTime) * 1.5;
+      sphere.position.y = Math.abs(Math.sin(elapsedTime * 3));
+
+      // Update the shadow
+      sphereShadow.position.x = sphere.position.x;
+      sphereShadow.position.z = sphere.position.z;
+      sphereShadow.material.opacity = (1 - sphere.position.y) * 0.3;
+
       window.requestAnimationFrame(animate);
     }
 
