@@ -2,7 +2,6 @@
   import { Font } from "three/examples/jsm/loaders/FontLoader";
   import { getCanvasDims } from "$lib/util";
   import { onMount } from "svelte";
-  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
   import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
@@ -12,7 +11,11 @@
   import matcap from "$lib/assets/textures/matcap.png";
   import typeface from "$lib/assets/Yellowtail_Regular.json";
 
-  onMount(() => {
+  onMount(async() => {
+    const { OrbitControls } = (
+      await import("three/examples/jsm/controls/OrbitControls")
+    );
+
     const { width, height } = getCanvasDims();
 
     const scene = new THREE.Scene();

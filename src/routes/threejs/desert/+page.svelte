@@ -1,17 +1,21 @@
 <script lang="ts">
   import * as THREE from "three";
   import { onMount } from "svelte";
-  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
   import * as colors from "$lib/colors";
   import sandy from "$lib/assets/textures/sandy.jpg";
 
   onMount(async () => {
     const guiLib = (await import("lil-gui")).default;
+    const { OrbitControls } = (
+      await import("three/examples/jsm/controls/OrbitControls")
+    );
 
     const gui = new guiLib({
       container: document.getElementById("desertGUI") ?? undefined,
       autoPlace: false,
     });
+
+
     const height = window.innerHeight;
     const width = window.innerWidth;
 

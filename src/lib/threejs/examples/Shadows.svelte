@@ -3,13 +3,15 @@
   import { onMount } from "svelte";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
-  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
   import Example from "$lib/threejs/Example.svelte";
   // @ts-ignore it's a markdown file
   import ExampleMarkdown from "./Shadows.md";
 
   onMount(async () => {
     const guiLib = (await import("lil-gui")).default;
+    const { OrbitControls } = (
+      await import("three/examples/jsm/controls/OrbitControls")
+    );
 
     const gui = new guiLib({
       container: document.getElementById("shadowsGUI") ?? undefined,
@@ -96,7 +98,7 @@
       .step(1);
     // directional light camera helper
     const directionalLightCameraHelper = new THREE.CameraHelper(
-      directionalLight.shadow.camera,
+      directionalLight.shadow.camera
     );
     scene.add(directionalLightCameraHelper);
     directionalLightCameraHelper.visible = false;
@@ -106,7 +108,7 @@
       colors.spaceCadet,
       50, // intensity
       5, // distance
-      Math.PI * 0.3, // angle
+      Math.PI * 0.3 // angle
     );
     spotLight.position.set(0, 1, 2);
     spotLight.castShadow = true;
