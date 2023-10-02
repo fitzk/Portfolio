@@ -65,29 +65,37 @@
 
 <h2 id="anchor-0">{examples[0]}</h2>
 <DrawCube />
+<br />
 
 <h2 id="anchor-1">{examples[1]}</h2>
 <TransformCube />
 <TransformThreeCubes />
+<br />
 
 <h2 id="anchor-2">{examples[2]}</h2>
 <AnimateCube />
+<br />
 
 <h2 id="anchor-3">{examples[3]}</h2>
 <DebugGUI />
+<br />
 
 <h2 id="anchor-4">{examples[4]}</h2>
 <ThreeDimensionText />
+<br />
 
 <h2 id="anchor-5">{examples[5]}</h2>
 <Lights />
+<br />
 
 <h2 id="anchor-6">{examples[6]}</h2>
 <Shadows />
 <ShadowSphere />
+<br />
 
 <h2 id="anchor-7">{examples[7]}</h2>
 <ZFighting />
+<br />
 
 <pre>
 references & inspiration 

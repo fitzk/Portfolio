@@ -9,15 +9,7 @@
   import ExampleMarkdown from "./ShadowsSphere.md";
   import simpleShadow from "$lib/assets/textures/simpleShadow.jpg";
 
-  onMount(async () => {
-    const guiLib = (await import("lil-gui")).default;
-
-    const gui = new guiLib({
-      container: document.getElementById("shadowsContGUI") ?? undefined,
-      autoPlace: false,
-      closeFolders: true,
-    });
-
+  onMount(() => {
     THREE.ColorManagement.enabled = false;
 
     const { width, height } = getCanvasDims();
@@ -66,10 +58,6 @@
     // ambient light
     const ambientLight = new THREE.AmbientLight(colors.white, 0.25);
     scene.add(ambientLight);
-    // ambient light gui
-    const ambientLightFolder = gui.addFolder("Ambient Light");
-    ambientLightFolder.addColor(ambientLight, "color");
-    ambientLightFolder.add(ambientLight, "intensity").min(0).max(5).step(1);
 
     // directional light
     const directionalLight = new THREE.DirectionalLight(colors.bitterSweet, 3);
@@ -79,37 +67,6 @@
     // reduce amplitude
     directionalLight.shadow.camera.top = 3;
     scene.add(directionalLight);
-
-    // directional light gui
-    const directionalLightFolder = gui.addFolder("Directional Light");
-    directionalLightFolder.addColor(directionalLight, "color");
-    directionalLightFolder
-      .add(directionalLight, "intensity")
-      .min(0)
-      .max(5)
-      .step(1);
-    directionalLightFolder
-      .add(directionalLight.position, "x")
-      .min(-5)
-      .max(5)
-      .step(1);
-    directionalLightFolder
-      .add(directionalLight.position, "y")
-      .min(-5)
-      .max(5)
-      .step(1);
-    directionalLightFolder
-      .add(directionalLight.position, "z")
-      .min(-5)
-      .max(5)
-      .step(1);
-
-    // directional light helper
-    const directionalLightCameraHelper = new THREE.CameraHelper(
-      directionalLight.shadow.camera,
-    );
-    scene.add(directionalLightCameraHelper);
-    directionalLightCameraHelper.visible = false;
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
@@ -152,9 +109,3 @@
     <canvas id="shadowsSphere" />
   </span>
 </Example>
-
-<style>
-  #shadowsContGUI {
-    margin-left: 1em;
-  }
-</style>
