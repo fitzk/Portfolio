@@ -2,12 +2,12 @@
   import { getCanvasDims } from "$lib/util";
   import { onMount } from "svelte";
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-  import simpleShadow from "$lib/assets/textures/simpleShadow.jpg";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
   // @ts-ignore it's a markdown file
-  import ExampleMarkdown from "./ZFighting.md";
+  import ExampleMarkdown from "./ShadowsSphere.md";
+  import simpleShadow from "$lib/assets/textures/simpleShadow.jpg";
 
   onMount(() => {
     THREE.ColorManagement.enabled = false;
@@ -15,6 +15,12 @@
     const { width, height } = getCanvasDims();
 
     const scene = new THREE.Scene();
+
+    const sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(1),
+      new THREE.MeshStandardMaterial(),
+    );
+    scene.add(sphere);
 
     // camera
     const camera = new THREE.PerspectiveCamera(75, width / height);
@@ -30,19 +36,22 @@
     const material = new THREE.MeshBasicMaterial({
       alphaMap: texture,
       transparent: true,
-      color: colors.bitterSweet,
+      color: colors.black,
     });
     const sphereShadow = new THREE.Mesh(
       new THREE.PlaneGeometry(3, 3),
       material,
     );
     sphereShadow.rotation.x = Math.PI * 1.5;
+    sphereShadow.position.z = 0.5;
+    sphereShadow.position.y = -0.5;
     scene.add(sphereShadow);
 
     const basePlane = new THREE.Mesh(
       planeGeometry,
       new THREE.MeshBasicMaterial(),
     );
+    basePlane.position.y = -1;
     basePlane.rotation.x = Math.PI * 1.5;
     scene.add(basePlane);
 
@@ -54,18 +63,18 @@
     const directionalLight = new THREE.DirectionalLight(colors.bitterSweet, 3);
     directionalLight.position.x = 2;
     directionalLight.position.z = 2;
+
     // reduce amplitude
     directionalLight.shadow.camera.top = 3;
     scene.add(directionalLight);
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("ZFighting") ?? undefined,
+      canvas: document.getElementById("shadowsSphereCanvas") ?? undefined,
     });
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.shadowMap.enabled = true;
     renderer.setSize(width, height);
-    renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
     const controls = new OrbitControls(camera, renderer.domElement);
     const clock = new THREE.Clock();
@@ -74,24 +83,29 @@
       controls.update();
       renderer.render(scene, camera);
       const elapsedTime = clock.getElapsedTime();
-      basePlane.rotation.z = elapsedTime;
+
+      // Update the sphere
+      sphere.position.x = Math.cos(elapsedTime) * 1.5;
+      sphere.position.z = Math.sin(elapsedTime) * 1.5;
+      sphere.position.y = Math.abs(Math.sin(elapsedTime * 3));
+
+      // Update the shadow
+      sphereShadow.position.x = sphere.position.x;
+      sphereShadow.position.z = sphere.position.z;
+      sphereShadow.material.opacity = (1 - sphere.position.y) * 0.4;
+
       window.requestAnimationFrame(animate);
     }
 
     animate();
+    renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
   });
 </script>
 
 <Example>
   <ExampleMarkdown />
   <span slot="live">
-    <div id="ZFightingGUI" />
-    <canvas id="ZFighting" />
+    <div id="shadowsSphereGUI" />
+    <canvas id="shadowsSphereCanvas" />
   </span>
 </Example>
-
-<style>
-  #ZFightingGUI {
-    margin-left: 1em;
-  }
-</style>

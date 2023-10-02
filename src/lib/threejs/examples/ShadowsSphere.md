@@ -3,7 +3,7 @@
 
 ### Shadows Animated Sphere
 
-Instead of baking the shadow into the model directly using software, an alternative is loading a shadow texture as an alphaMap material and animating the resulting mesh relative to the sphere. The shadow jpg is loaded using the texture loader and the shadow mesh positioned slightly above the base plane.
+Instead of baking the shadow into the model directly using software, an alternative is loading a shadow texture as an alphaMap material and animating the resulting mesh relative to the sphere. The shadow jpg is loaded using the texture loader and the shadow mesh positioned slightly above the base plane. ["The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque)"](https://threejs.org/docs/#api/en/materials/MeshBasicMaterial.alphaMap).
 
 ```ts
 import simpleShadow from "assets/textures/simpleShadow.jpg";
@@ -15,7 +15,7 @@ const texture = textureLoader.load(simpleShadow);
 const material = new THREE.MeshBasicMaterial({
   alphaMap: texture,
   transparent: true,
-  color: colors.black,
+  color: 0x000000,
 });
 const sphereShadow = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), material);
 sphereShadow.rotation.x = Math.PI * 1.5;

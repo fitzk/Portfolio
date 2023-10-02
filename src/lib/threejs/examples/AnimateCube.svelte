@@ -27,7 +27,7 @@
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("animateCube") ?? undefined,
+      canvas: document.getElementById("animateCubeCanvas") ?? undefined,
     });
     renderer.setSize(width, height);
 
@@ -46,5 +46,5 @@
 
 <Example>
   <ExampleMarkdown />
-  <canvas id="animateCube" slot="live" />
+  <canvas id="animateCubeCanvas" slot="live" />
 </Example>

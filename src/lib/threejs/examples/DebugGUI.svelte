@@ -38,7 +38,7 @@
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("lilgui") ?? undefined,
+      canvas: document.getElementById("lilguiCanvas") ?? undefined,
     });
     renderer.setSize(width, height);
 
@@ -58,7 +58,7 @@ for this example.
   <ExampleMarkdown />
   <span slot="live">
     <div id="gui" />
-    <canvas id="lilgui" />
+    <canvas id="lilguiCanvas" />
   </span>
 </Example>
 

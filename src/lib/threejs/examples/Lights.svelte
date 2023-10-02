@@ -6,13 +6,13 @@
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
   import Example from "$lib/threejs/Example.svelte";
   // @ts-ignore it's a markdown file
-  import ExampleMarkdown from "./Shadows.md";
+  import ExampleMarkdown from "./Lights.md";
 
   onMount(async () => {
     const guiLib = (await import("lil-gui")).default;
 
     const gui = new guiLib({
-      container: document.getElementById("shadowsGUI") ?? undefined,
+      container: document.getElementById("lightsGUI") ?? undefined,
       autoPlace: false,
       closeFolders: true,
     });
@@ -25,10 +25,10 @@
 
     // shared material
     const material = new THREE.MeshStandardMaterial();
+    material.roughness = 1;
 
-    const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1));
-    cube.position.y = 0.5;
-    cube.castShadow = true;
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+    cube.position.y = 1.5;
     scene.add(cube);
 
     // axis helper
@@ -37,20 +37,20 @@
 
     // camera
     const camera = new THREE.PerspectiveCamera(75, width / height);
-    camera.position.z = 8; // move camera in front of cube by moving camera along z access
+    camera.position.z = 6; // move camera in front of cube by moving camera along z access
     camera.position.y = 3;
-    camera.position.x = 3;
     scene.add(camera);
 
     // plane mesh
     const planeGeometry = new THREE.PlaneGeometry(8, 8);
     const plane = new THREE.Mesh(planeGeometry, material);
     plane.rotation.x = Math.PI * 1.5;
-    plane.receiveShadow = true;
     scene.add(plane);
 
+    // LIGHTS START
+
     // ambient light
-    const ambientLight = new THREE.AmbientLight(colors.white, 0.25);
+    const ambientLight = new THREE.AmbientLight(colors.mustard, 0);
     scene.add(ambientLight);
     // ambient light gui
     const ambientLightFolder = gui.addFolder("Ambient Light");
@@ -58,18 +58,7 @@
     ambientLightFolder.add(ambientLight, "intensity").min(0).max(5).step(1);
 
     // directional light
-    const directionalLight = new THREE.DirectionalLight(colors.bitterSweet, 3);
-    directionalLight.position.x = 2;
-    directionalLight.position.z = 2;
-    directionalLight.castShadow = true;
-    directionalLight.shadow.camera.near = 1;
-    directionalLight.shadow.camera.far = 8;
-    directionalLight.shadow.mapSize.width = 1024; // has to be a power of 2
-    directionalLight.shadow.mapSize.height = 1024;
-    directionalLight.shadow.radius = 12; // doesnt work with PCF shadow map
-
-    // reduce amplitude
-    directionalLight.shadow.camera.top = 3;
+    const directionalLight = new THREE.DirectionalLight(colors.jordyBlue, 0);
     scene.add(directionalLight);
     // directional light gui
     const directionalLightFolder = gui.addFolder("Directional Light");
@@ -94,33 +83,72 @@
       .min(-5)
       .max(5)
       .step(1);
-    // directional light camera helper
-    const directionalLightCameraHelper = new THREE.CameraHelper(
-      directionalLight.shadow.camera,
+
+    // hemisphere light
+    const hemisphereLight = new THREE.HemisphereLight(
+      colors.cornflowerBlue,
+      colors.lightGreen,
+      0,
     );
-    scene.add(directionalLightCameraHelper);
-    directionalLightCameraHelper.visible = false;
+    scene.add(hemisphereLight);
+    // hemisphere light gui
+    const hemisphereLightFolder = gui.addFolder("Hemisphere Light");
+    hemisphereLightFolder.addColor(hemisphereLight, "color").name("skyColor");
+    hemisphereLightFolder.addColor(hemisphereLight, "groundColor");
+    hemisphereLightFolder
+      .add(hemisphereLight, "intensity")
+      .min(0)
+      .max(5)
+      .step(1);
+
+    // point light
+    const pointLight = new THREE.PointLight(colors.mustard, 0, 5, 3);
+    pointLight.position.set(0, 3, 0);
+    scene.add(pointLight);
+    // point light gui
+    const pointLightFolder = gui.addFolder("Point Light");
+    pointLightFolder.addColor(pointLight, "color");
+    pointLightFolder.add(pointLight, "intensity").min(0).max(1000).step(1);
+    pointLightFolder.add(pointLight.position, "x").min(-5).max(5).step(1);
+    pointLightFolder.add(pointLight.position, "y").min(-5).max(5).step(1);
+    pointLightFolder.add(pointLight.position, "z").min(-5).max(5).step(1);
+    pointLightFolder.add(pointLight, "decay").min(0).max(5).step(1);
+
+    // rect area light, only works with MeshStandardMaterial or MeshPhysicalMaterial
+    const rectAreaLight = new THREE.RectAreaLight(
+      colors.tropicalIndigo,
+      0,
+      2,
+      2,
+    );
+    // rectAreaLight.position.x = 2;
+    // rectAreaLight.lookAt(new THREE.Vector3())
+    scene.add(rectAreaLight);
+    // rect area light gui
+    const rectAreaLightFolder = gui.addFolder("Rect Area Light");
+    rectAreaLightFolder
+      .add(rectAreaLight, "intensity")
+      .min(0)
+      .max(1000)
+      .step(1);
+    rectAreaLightFolder.add(rectAreaLight, "height").min(1).max(5).step(1);
+    rectAreaLightFolder.add(rectAreaLight, "width").min(1).max(5).step(1);
+    rectAreaLightFolder.add(rectAreaLight.position, "x").min(-5).max(5).step(1);
+    rectAreaLightFolder.add(rectAreaLight.position, "y").min(-5).max(5).step(1);
+    rectAreaLightFolder.add(rectAreaLight.position, "z").min(-5).max(5).step(1);
 
     // spot light
     const spotLight = new THREE.SpotLight(
-      colors.spaceCadet,
-      50, // intensity
-      5, // distance
-      Math.PI * 0.3, // angle
+      colors.white,
+      0, // intensity
+      10, // distance
+      Math.PI * 0.1, // angle
+      0.25, // prenumbra
+      1, // decay
     );
-    spotLight.position.set(0, 1, 2);
-    spotLight.castShadow = true;
-    spotLight.shadow.mapSize.width = 1024; // has to be a power of 2
-    spotLight.shadow.mapSize.height = 1024;
-    spotLight.shadow.camera.fov = 10;
-    spotLight.shadow.camera.near = 0.1;
-    spotLight.shadow.camera.far = 5;
+    spotLight.position.set(1, 1, -1);
     scene.add(spotLight);
     scene.add(spotLight.target);
-    // helper
-    const spotLightCameraHelper = new THREE.SpotLightHelper(spotLight);
-    scene.add(spotLightCameraHelper);
-    spotLightCameraHelper.visible = false;
     // spot light gui
     const spotLightFolder = gui.addFolder("Spot Light");
     spotLightFolder.add(spotLight, "intensity").min(0).max(1000).step(1);
@@ -131,13 +159,12 @@
     spotLightFolder.add(spotLight.position, "x").min(-5).max(5).step(1);
     spotLightFolder.add(spotLight.position, "y").min(-5).max(5).step(1);
     spotLightFolder.add(spotLight.position, "z").min(-5).max(5).step(1);
+    // LIGHTS END
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("shadows") ?? undefined,
+      canvas: document.getElementById("lightsCanvas") ?? undefined,
     });
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.shadowMap.enabled = true;
     renderer.setSize(width, height);
     renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
@@ -156,13 +183,13 @@
 <Example>
   <ExampleMarkdown />
   <span slot="live">
-    <div id="shadowsGUI" />
-    <canvas id="shadows" />
+    <div id="lightsGUI" />
+    <canvas id="lightsCanvas" />
   </span>
 </Example>
 
 <style>
-  #shadowsGUI {
+  #lightsGUI {
     margin-left: 1em;
   }
 </style>

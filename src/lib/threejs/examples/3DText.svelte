@@ -29,7 +29,7 @@
 
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("3DText") ?? undefined,
+      canvas: document.getElementById("3DTextCanvas") ?? undefined,
     });
 
     renderer.setSize(width, height);
@@ -52,7 +52,6 @@
     const textMaterial = new THREE.MeshMatcapMaterial({
       matcap: texture,
     });
-
     const mesh = new THREE.Mesh(textGeometry, textMaterial);
     scene.add(mesh);
 
@@ -70,5 +69,5 @@
 
 <Example>
   <ExampleMarkdown />
-  <canvas id="3DText" slot="live" />
+  <canvas id="3DTextCanvas" slot="live" />
 </Example>

@@ -1,14 +1,14 @@
 <script lang="ts">
-  import AnimateCube from "$lib/threejs/basics/AnimateCube.svelte";
-  import DebugGUI from "$lib/threejs/basics/DebugGUI.svelte";
-  import DrawCube from "$lib/threejs/basics/DrawCube.svelte";
-  import Lights from "$lib/threejs/basics/Lights.svelte";
-  import ThreeDimensionText from "$lib/threejs/basics/3DText.svelte";
-  import TransformCube from "$lib/threejs/basics/TransformCube.svelte";
-  import TransformThreeCubes from "$lib/threejs/basics/TransformThreeCubes.svelte";
-  import Shadows from "$lib/threejs/basics/Shadows.svelte";
-  import ShadowSphere from "$lib/threejs/basics/ShadowsSphere.svelte";
-  import ZFighting from "$lib/threejs/basics/ZFighting.svelte";
+  import AnimateCube from "$lib/threejs/examples/AnimateCube.svelte";
+  import DebugGUI from "$lib/threejs/examples/DebugGUI.svelte";
+  import DrawCube from "$lib/threejs/examples/DrawCube.svelte";
+  import Lights from "$lib/threejs/examples/Lights.svelte";
+  import ThreeDimensionText from "$lib/threejs/examples/3DText.svelte";
+  import TransformCube from "$lib/threejs/examples/TransformCube.svelte";
+  import TransformThreeCubes from "$lib/threejs/examples/TransformThreeCubes.svelte";
+  import Shadows from "$lib/threejs/examples/Shadows.svelte";
+  import ShadowSphere from "$lib/threejs/examples/ShadowsSphere.svelte";
+  import ZFighting from "$lib/threejs/examples/ZFighting.svelte";
   import AnchorSVG from "$lib/assets/AnchorSVG.svelte";
   import * as colors from "$lib/colors";
 
