@@ -9,8 +9,8 @@
 
   onMount(async () => {
     const guiLib = (await import("lil-gui")).default;
-    const { OrbitControls } = (
-      await import("three/examples/jsm/controls/OrbitControls")
+    const { OrbitControls } = await import(
+      "three/examples/jsm/controls/OrbitControls"
     );
 
     const gui = new guiLib({
@@ -98,7 +98,7 @@
       .step(1);
     // directional light camera helper
     const directionalLightCameraHelper = new THREE.CameraHelper(
-      directionalLight.shadow.camera
+      directionalLight.shadow.camera,
     );
     scene.add(directionalLightCameraHelper);
     directionalLightCameraHelper.visible = false;
@@ -108,7 +108,7 @@
       colors.spaceCadet,
       50, // intensity
       5, // distance
-      Math.PI * 0.3 // angle
+      Math.PI * 0.3, // angle
     );
     spotLight.position.set(0, 1, 2);
     spotLight.castShadow = true;

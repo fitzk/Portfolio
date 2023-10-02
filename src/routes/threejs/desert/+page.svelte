@@ -6,15 +6,14 @@
 
   onMount(async () => {
     const guiLib = (await import("lil-gui")).default;
-    const { OrbitControls } = (
-      await import("three/examples/jsm/controls/OrbitControls")
+    const { OrbitControls } = await import(
+      "three/examples/jsm/controls/OrbitControls"
     );
 
     const gui = new guiLib({
       container: document.getElementById("desertGUI") ?? undefined,
       autoPlace: false,
     });
-
 
     const height = window.innerHeight;
     const width = window.innerWidth;

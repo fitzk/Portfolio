@@ -11,9 +11,9 @@
   import matcap from "$lib/assets/textures/matcap.png";
   import typeface from "$lib/assets/Yellowtail_Regular.json";
 
-  onMount(async() => {
-    const { OrbitControls } = (
-      await import("three/examples/jsm/controls/OrbitControls")
+  onMount(async () => {
+    const { OrbitControls } = await import(
+      "three/examples/jsm/controls/OrbitControls"
     );
 
     const { width, height } = getCanvasDims();
