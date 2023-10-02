@@ -12,5 +12,9 @@ export const tropicalIndigo = 0x918ef4;
 export const white = 0xffffff;
 
 export function toHex(color: number) {
+  // black
+  if (color === 0) {
+    return "#000000";
+  }
   return `#${color.toString(16)}`;
 }

@@ -33,8 +33,6 @@
   });
 </script>
 
-## Draw a Cube
-
 <Example>
   <ExampleMarkdown />
   <canvas id="drawCube" slot="live" />

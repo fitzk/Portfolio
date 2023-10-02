@@ -2,18 +2,18 @@
   import { getCanvasDims } from "$lib/util";
   import { onMount } from "svelte";
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+  import simpleShadow from "$lib/assets/textures/simpleShadow.jpg";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
   import Example from "$lib/threejs/Example.svelte";
   // @ts-ignore it's a markdown file
-  import ExampleMarkdown from "./ShadowsCont.md";
-  import simpleShadow from "$lib/assets/textures/simpleShadow.jpg";
+  import ExampleMarkdown from "./ZFighting.md";
 
   onMount(async () => {
     const guiLib = (await import("lil-gui")).default;
 
     const gui = new guiLib({
-      container: document.getElementById("shadowsContGUI") ?? undefined,
+      container: document.getElementById("ZFightingGUI") ?? undefined,
       autoPlace: false,
       closeFolders: true,
     });
@@ -23,17 +23,6 @@
     const { width, height } = getCanvasDims();
 
     const scene = new THREE.Scene();
-
-    const sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(1),
-      new THREE.MeshStandardMaterial()
-    );
-    // sphere.position.y = 2;
-    scene.add(sphere);
-
-    // axis helper
-    const axisHelper = new THREE.AxesHelper(4);
-    scene.add(axisHelper);
 
     // camera
     const camera = new THREE.PerspectiveCamera(75, width / height);
@@ -49,19 +38,19 @@
     const material = new THREE.MeshBasicMaterial({
       alphaMap: texture,
       transparent: true,
-      color: colors.black,
+      color: colors.bitterSweet,
     });
-    const sphereShadow = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), material);
+    const sphereShadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(3, 3),
+      material,
+    );
     sphereShadow.rotation.x = Math.PI * 1.5;
-    sphereShadow.position.z = 0.5;
-    sphereShadow.position.y = -0.5;
     scene.add(sphereShadow);
 
     const basePlane = new THREE.Mesh(
       planeGeometry,
-      new THREE.MeshBasicMaterial()
+      new THREE.MeshBasicMaterial(),
     );
-    basePlane.position.y = -1;
     basePlane.rotation.x = Math.PI * 1.5;
     scene.add(basePlane);
 
@@ -108,39 +97,14 @@
 
     // directional light helper
     const directionalLightCameraHelper = new THREE.CameraHelper(
-      directionalLight.shadow.camera
+      directionalLight.shadow.camera,
     );
     scene.add(directionalLightCameraHelper);
     directionalLightCameraHelper.visible = false;
 
-    // spot light
-    const spotLight = new THREE.SpotLight(
-      colors.spaceCadet,
-      50, // intensity
-      5, // distance
-      Math.PI * 0.3 // angle
-    );
-    spotLight.position.set(0, 1, 2);
-    scene.add(spotLight);
-    scene.add(spotLight.target);
-    // helper
-    const spotLightCameraHelper = new THREE.SpotLightHelper(spotLight);
-    scene.add(spotLightCameraHelper);
-    spotLightCameraHelper.visible = false;
-    // spot light gui
-    const spotLightFolder = gui.addFolder("Spot Light");
-    spotLightFolder.add(spotLight, "intensity").min(0).max(1000).step(1);
-    spotLightFolder.add(spotLight, "distance").min(0).max(5).step(0.1);
-    spotLightFolder.add(spotLight, "penumbra").min(0).max(1).step(0.01);
-    spotLightFolder.add(spotLight, "decay").min(0).max(100).step(1);
-    spotLightFolder.add(spotLight, "angle").min(0).max(360).step(1);
-    spotLightFolder.add(spotLight.position, "x").min(-5).max(5).step(1);
-    spotLightFolder.add(spotLight.position, "y").min(-5).max(5).step(1);
-    spotLightFolder.add(spotLight.position, "z").min(-5).max(5).step(1);
-
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("shadowsCont") ?? undefined,
+      canvas: document.getElementById("ZFighting") ?? undefined,
     });
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.shadowMap.enabled = true;
@@ -154,17 +118,7 @@
       controls.update();
       renderer.render(scene, camera);
       const elapsedTime = clock.getElapsedTime();
-
-      // Update the sphere
-      sphere.position.x = Math.cos(elapsedTime) * 1.5;
-      sphere.position.z = Math.sin(elapsedTime) * 1.5;
-      sphere.position.y = Math.abs(Math.sin(elapsedTime * 3));
-
-      // Update the shadow
-      sphereShadow.position.x = sphere.position.x;
-      sphereShadow.position.z = sphere.position.z;
-      sphereShadow.material.opacity = (1 - sphere.position.y) * 0.3;
-
+      basePlane.rotation.z = elapsedTime;
       window.requestAnimationFrame(animate);
     }
 
@@ -175,13 +129,13 @@
 <Example>
   <ExampleMarkdown />
   <span slot="live">
-    <div id="shadowsContGUI" />
-    <canvas id="shadowsCont" />
+    <div id="ZFightingGUI" />
+    <canvas id="ZFighting" />
   </span>
 </Example>
 
 <style>
-  #shadowsContGUI {
+  #ZFightingGUI {
     margin-left: 1em;
   }
 </style>
