@@ -64,7 +64,9 @@
 </div>
 <br />
 
+<h2> Mine Sweeper</h2>
 <MineSweeper />
+
 <h2 id="anchor-0">{examples[0]}</h2>
 <DrawCube />
 <br />
