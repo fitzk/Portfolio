@@ -3,9 +3,7 @@
   import { onMount } from "svelte";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
-  import Example from "$lib/threejs/Example.svelte";
   // @ts-ignore it's a markdown file
-  import ExampleMarkdown from "./DrawCube.md";
   import { getCanvasDims } from "$lib/util";
 
   // Rules
@@ -111,73 +109,106 @@
   // TODO: recursive clearing fn
 
   onMount(async () => {
+    const { OrbitControls } = await import(
+      "three/examples/jsm/controls/OrbitControls"
+    );
     const guiLib = (await import("lil-gui")).default;
 
     const gui = new guiLib({
       container: document.getElementById("mineSweeperGUI") ?? undefined,
       autoPlace: false,
     });
-
     const { width, height } = getCanvasDims();
     const scene = new THREE.Scene();
 
+    // axis helper
+    const axisHelper = new THREE.AxesHelper(11);
+
+    const canvas = document.getElementById("mineField");
     // renderer
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("mineField") ?? undefined,
+      canvas: canvas ?? undefined,
     });
     renderer.setSize(width, height);
 
-    // camera
-    const camera = new THREE.PerspectiveCamera(75, width / height);
-    camera.position.z = 4; // move camera in front of cube by moving camera along z access
+    const camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 10000);
+    camera.position.set(0, 0, 10);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
     scene.add(camera);
 
-    const raycaster = new THREE.Raycaster();
-    const pointer = new THREE.Vector2();
-    function onPointerMove(event: PointerEvent) {
-      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    }
-    // https://threejs.org/docs/#api/en/loaders/CubeTextureLoader cube faces
-    const firstRow = [];
+    const helper = new THREE.CameraHelper(camera);
+    const raycaster = new THREE.Raycaster(undefined, undefined, 0.2);
+    const mouse = new THREE.Vector2();
 
-    let index = 0;
-    while (index < 4) {
-      let color = index % 2 === 0 ? colors.lightGreen : colors.bitterSweet;
+    // https://threejs.org/docs/#api/en/loaders/CubeTextureLoader cube faces
+    const grid: THREE.Mesh<
+      THREE.BoxGeometry,
+      THREE.MeshBasicMaterial,
+      THREE.Object3DEventMap
+    >[][] = [[], [], [], []];
+
+    const mineField = new THREE.Group();
+    scene.add(mineField);
+
+    let row = 0;
+    let column = 0;
+    while (row < 4) {
+      let color = column % 2 === 0 ? colors.lightGreen : colors.bitterSweet;
+
+      if (row % 2 === 0) {
+        color = column % 2 === 0 ? colors.bitterSweet : colors.lightGreen;
+      }
+
       const cube = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
         new THREE.MeshBasicMaterial({ color })
       );
 
-      cube.position.x = index;
-      firstRow.push(cube);
-      scene.add(cube);
+      cube.position.y = row;
+      cube.position.x = column;
+      grid[row].push(cube);
+      mineField.add(cube);
 
-      index += 1;
+      column += 1;
+      if (column === 4) {
+        row += 1;
+        column = 0;
+      }
     }
-
-    gui.add(firstRow[0].position, "x").name("row 0, cube 0: x");
-    gui.add(firstRow[1].position, "x").name("row 0, cube 1: x");
-    gui.add(firstRow[2].position, "x").name("row 0, cube 2: x");
-    gui.add(firstRow[3].position, "x").name("row 0, cube 3: x");
 
     let intersects: THREE.Intersection<
       THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>
     >[] = [];
 
-    window.addEventListener("pointermove", onPointerMove);
+    function onMouseMove(event: PointerEvent | MouseEvent) {
+      mouse.x = (event.offsetX / width) * 2 - 1;
+      mouse.y = -(event.offsetY / height) * 2 + 1;
+    }
 
-    window.addEventListener("click", () => {
+    function onClick() {
+      raycaster.setFromCamera(mouse, camera);
       intersects = raycaster.intersectObjects(scene.children);
-    });
+      if (intersects.length) {
+        intersects
+          // We want to ignore any helpers we have loaded into the scene
+          .filter((intersect) => intersect.object.type === "Mesh")
+          .forEach((intersect) => {
+            intersect.object.material.color.set(colors.mustard);
+          });
+      }
+    }
+
+    if (canvas) {
+      canvas.addEventListener("mousemove", onMouseMove, false);
+      canvas.addEventListener("click", onClick, false);
+    }
+
+    scene.add(helper);
+    scene.add(axisHelper);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     function animate() {
-      if (intersects.length) {
-        intersects.forEach((intersect) =>
-          intersect.object.material.color.set(colors.mustard)
-        );
-      }
-      raycaster.setFromCamera(pointer, camera);
+      controls.update();
       renderer.render(scene, camera);
       window.requestAnimationFrame(animate);
     }
@@ -186,5 +217,4 @@
   });
 </script>
 
-<div id="mineSweeperGUI" />
 <canvas id="mineField" />

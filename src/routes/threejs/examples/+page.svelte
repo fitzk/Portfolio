@@ -11,7 +11,6 @@
   import ZFighting from "$lib/threejs/examples/ZFighting.svelte";
   import AnchorSVG from "$lib/assets/AnchorSVG.svelte";
   import * as colors from "$lib/colors";
-  import MineSweeper from "$lib/threejs/examples/MineSweeper.svelte";
 
   const examples = [
     "Draw a Cube",
@@ -63,9 +62,6 @@
   {/each}
 </div>
 <br />
-
-<h2> Mine Sweeper</h2>
-<MineSweeper />
 
 <h2 id="anchor-0">{examples[0]}</h2>
 <DrawCube />
