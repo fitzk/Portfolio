@@ -18,7 +18,6 @@
   const ROWS = 12;
   const COLUMNS = 12;
 
-  // TODO: randomize
   // TODO: set after first click
   const numMines = THREE.MathUtils.randInt(8, 12);
   let numActiveCubes = 0;
@@ -234,7 +233,6 @@
     /**
      * Update active state on cube and reveal count (recursive)
      * @param cube unwrapped intersection object
-     * @todo clear text when it's showing on active tiles randomly
      */
     function setActive(
       cube: THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>,
