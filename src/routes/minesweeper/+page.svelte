@@ -350,4 +350,5 @@
 </script>
 
 <h2>Minesweeper</h2>
+<br/>
 <canvas id="mineField" />
