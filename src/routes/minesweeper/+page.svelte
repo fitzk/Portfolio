@@ -8,32 +8,27 @@
   import typeface from "three/examples/fonts/optimer_bold.typeface.json";
 
   /**
-   * Rules
-   * 1. each box has a number indicating how many mines are around it, mines that are diagnal to the cube are included in this count
-   * 2. if you click on a mine you loose!  when they loose the game reveals all mines
-   * 3. when a clear tile is clicked, adjuacent tiles without mines are also cleared
-   * Behavior Notes
-   * * cubes with neighboring mines should show the count
+   * Rules:
+   * 1. Each box has a number indicating how many mines are around it, mines that are diagnal to the cube are included in this count
+   * 2. If you click on a mine you loose!  when they loose the game reveals all mines
+   * 3. When a clear tile is clicked, adjuacent tiles without mines are also cleared
+   * Behavior Notes:
+   * * Cubes with neighboring mines should show the count
    */
-
   const ROWS = 12;
   const COLUMNS = 12;
-
   // TODO: set after first click
   const numMines = THREE.MathUtils.randInt(8, 12);
   let numActiveCubes = 0;
   let initialClick = false;
-
   let mines: Array<{ column: number; row: number }> = [];
-
   for (let i = 0; i < numMines; i++) {
     mines.push({
       column: THREE.MathUtils.randInt(0, ROWS - 1),
       row: THREE.MathUtils.randInt(0, COLUMNS - 1),
     });
   }
-
-  // prepopulate mine counts matrix setting columns to 0 for each row
+  // Prepopulate mine counts matrix setting columns to 0 for each row
   const neighboringMineCounts: number[][] = [];
   for (let r = 0; r < ROWS; r++) {
     let arr = [];
@@ -52,23 +47,23 @@
     // prev row
     if (row > 0) {
       const prevRow = row - 1;
-      // left cell
+      // left cube
       if (column > 0) {
         coords.push({ row: prevRow, column: column - 1 });
       }
-      // center cell
+      // center cube
       coords.push({ row: prevRow, column });
-      // right cell
+      // right cube
       if (column < neighboringMineCounts[prevRow].length - 1) {
         coords.push({ row: prevRow, column: column + 1 });
       }
     }
     // original row
-    // left cell
+    // left cube
     if (column > 0) {
       coords.push({ row: row, column: column - 1 });
     }
-    // right cell
+    // right cube
     if (column < neighboringMineCounts[row].length - 1) {
       coords.push({ row, column: column + 1 });
     }
@@ -76,13 +71,13 @@
     const finalRow = neighboringMineCounts.length - 1;
     if (row < finalRow) {
       const nextRow = row + 1;
-      // left cell
+      // left cube
       if (column > 0) {
         coords.push({ row: nextRow, column: column - 1 });
       }
-      // center cell
+      // center cube
       coords.push({ row: nextRow, column });
-      // right cell
+      // right cube
       if (column < neighboringMineCounts[nextRow].length - 1) {
         coords.push({ row: nextRow, column: column + 1 });
       }
@@ -90,7 +85,7 @@
     return coords;
   }
 
-  // sum # neighboring mines for each cube
+  // Sum # neighboring mines for each cube
   mines.forEach(({ row, column }) => {
     neighboringMineCounts[row][column] = -1;
     const mineNeighbors = getNeighbors(row, column);
@@ -110,8 +105,8 @@
       THREE.MeshBasicMaterial,
       THREE.Object3DEventMap
     >[][] = [];
+    // Label uuid mapped to cube uuid
     const labels: { [key: string]: string | undefined } = {};
-
     const { width, height } = getCanvasDims();
     const scene = new THREE.Scene();
     const canvas = document.getElementById("mineField");
@@ -119,25 +114,15 @@
       canvas: canvas ?? undefined,
     });
     renderer.setSize(width, height);
-
-    // camera
+    // Camera
     const camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 100);
     camera.position.set(0, 0, 6);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     scene.add(camera);
-
-    // used for interactions
+    // Used for interactions
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
-
-    // helpers
-    // const cameraHelper = new THREE.CameraHelper(camera);
-    // scene.add(cameraHelper);
-    // const axisHelper = new THREE.AxesHelper(20);
-    // scene.add(axisHelper);
-
-    // https://threejs.org/docs/#api/en/loaders/CubeTextureLoader cube faces
-
+    // Groups for cubes and labels
     const boardGroup = new THREE.Group();
     boardGroup.position.set(-5.5, -5.5, 0);
     scene.add(boardGroup);
@@ -148,32 +133,22 @@
 
     /**
      * Draw Grid
-     * grid is drawn bottom up, row 0 is closest to x axis
+     * Grid is drawn bottom up, row 0 is closest to x axis
      */
     let row = 0;
     let column = 0;
-
     while (row < ROWS) {
       if (!cubes[row]) {
         cubes[row] = [];
       }
-
       const hasMine = mines.some(
         (coords) => coords.row === row && coords.column === column,
       );
-
       let color = column % 2 === 0 ? colors.lightGreen : colors.greenBlue;
       if (row % 2 === 0) {
         color = column % 2 === 0 ? colors.greenBlue : colors.lightGreen;
       }
-
-      // uncomment to see mines
-      // if (hasMine) {
-      //   color = colors.black;
-      // }
-
       const neighboringMineCount = neighboringMineCounts[row][column];
-
       const cube = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
         new THREE.MeshBasicMaterial({ color, opacity: 0.9, transparent: true }),
@@ -187,7 +162,6 @@
       };
       cubes[row].push(cube);
       cubeGroup.add(cube);
-
       const labelGeometry = new TextGeometry(
         cube.userData.neighboringMineCount + "",
         {
@@ -197,7 +171,6 @@
           size: 0.5,
         },
       );
-
       labelGeometry.center();
       const label = new THREE.Mesh(
         labelGeometry,
@@ -205,7 +178,6 @@
           color: colors.black,
         }),
       );
-
       label.position.y = row;
       label.position.x = column;
       label.position.z = 0.02;
@@ -213,7 +185,6 @@
       labelGroup.add(label);
       // store text id to toggle visibility later
       labels[cube.uuid] = label.uuid;
-
       column += 1;
       if (column === COLUMNS) {
         row += 1;
@@ -222,7 +193,7 @@
     }
 
     /**
-     * mines should be visible on the board after this is called
+     * Mines should be visible on the board after this is called
      */
     function revealMines() {
       mines.forEach(({ row, column }) => {
@@ -242,30 +213,25 @@
         numActiveCubes += 1;
       }
       cube.userData.active = true;
-      // color cube for active state
       cube.material.color.set(colors.white);
       cube.material.opacity = 1;
-
       // check for loser
       if (cube.userData.mine) {
         revealMines();
         alert("you lose!");
         return;
       }
-
       // check for winner
       if (numActiveCubes === ROWS * COLUMNS - numMines + 1) {
         revealMines();
         alert("you win!");
         return;
       }
-
       const labelUUID = labels[cube.uuid];
       let label = labelGroup.getObjectByProperty("uuid", labelUUID);
       if (label && !label.visible && cube.userData.neighboringMineCount > 0) {
         label.visible = true;
       }
-
       if (cube.userData.neighboringMineCount === 0) {
         const coords = getNeighbors(cube.position.y, cube.position.x);
 
@@ -281,7 +247,7 @@
     // event handlers
     // TODO: unregister
     /**
-     * sets THREE.Pointer instance to normalized x, y required for raycaster to click the correct cubes
+     * Sets THREE.Pointer instance to normalized x, y required for raycaster to click the correct cubes
      * @param event
      */
     function onMouseMove(event: MouseEvent) {
@@ -290,7 +256,8 @@
     }
 
     /**
-     * 1. intial click allows for neighbor counts to be visible on
+     * Determine which cube was clicked on and call setActive to update it and it's neighbors active state
+     * Intial click allows for neighbor counts to be visible on active cubes with > 0 neighboring mines
      */
     function onClick() {
       if (!initialClick) {
@@ -322,20 +289,17 @@
       }
     }
 
-    // event listeners
+    // Register event handlers
     if (canvas) {
       canvas.addEventListener("mousemove", onMouseMove, false);
       canvas.addEventListener("click", onClick, false);
     }
-
     const controls = new OrbitControls(camera, renderer.domElement);
-
     function render() {
       controls.update();
       renderer.render(scene, camera);
       window.requestAnimationFrame(render);
     }
-
     render();
   });
 </script>
