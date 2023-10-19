@@ -30,7 +30,6 @@
     { row: 10, column: 10 },
     { row: 11, column: 3 },
     { row: 11, column: 8 },
-
   ];
 
   let numActiveCubes = 0;
@@ -162,7 +161,7 @@
       }
 
       const hasMine = mines.some(
-        (coords) => coords.row === row && coords.column === column
+        (coords) => coords.row === row && coords.column === column,
       );
 
       let color = column % 2 === 0 ? colors.lightGreen : colors.bitterSweet;
@@ -179,7 +178,7 @@
 
       const cubeMesh = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshBasicMaterial({ color })
+        new THREE.MeshBasicMaterial({ color }),
       );
       cubeMesh.position.y = row;
       cubeMesh.position.x = column;
@@ -209,12 +208,12 @@
     }
 
     /**
-     * 
+     *
      * @param cube unwrapped intersection object
      * @todo clear text when it's showing on active tiles randomly
      */
     function setActive(
-      cube: THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>
+      cube: THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>,
     ) {
       // check for loser
       if (cube.userData.mine) {
@@ -258,7 +257,7 @@
                   font: new Font(typeface),
                   height: 0.1, // extrusion depth
                   size: 0.5,
-                }
+                },
               );
 
               textGeometry.center();
@@ -266,7 +265,7 @@
                 textGeometry,
                 new THREE.MeshBasicMaterial({
                   color: colors.black,
-                })
+                }),
               );
 
               count.position.y = row;
@@ -317,7 +316,7 @@
           .filter(
             (intersect) =>
               intersect.object.type === "Mesh" &&
-              intersect.object.geometry.type === "BoxGeometry"
+              intersect.object.geometry.type === "BoxGeometry",
           )
           .map((intersected, idx) => {
             if (idx === 0) {
@@ -350,5 +349,5 @@
 </script>
 
 <h2>Minesweeper</h2>
-<br/>
+<br />
 <canvas id="mineField" />
