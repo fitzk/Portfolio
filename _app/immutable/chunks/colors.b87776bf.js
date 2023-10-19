@@ -1,0 +1,1 @@
+const s=0,n=16340559,e=7314667,a=3173292,o=10009074,c=9230224,r=16769863,i=1317697,l=9539316,u=16777215;function d(t){return t===0?"#000000":`#${t.toString(16)}`}export{n as a,s as b,e as c,d,a as g,o as j,c as l,r as m,i as s,l as t,u as w};
