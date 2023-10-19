@@ -6,7 +6,7 @@
   import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
   import * as colors from "$lib/colors";
   import * as THREE from "three";
-  import typeface from "$lib/assets/Yellowtail_Regular.json";
+  import typeface from "three/examples/fonts/optimer_bold.typeface.json";
 
   /**
    * Rules
@@ -20,20 +20,18 @@
 
   // TODO: randomize
   // TODO: set after first click
-  const mines = [
-    { row: 0, column: 0 },
-    { row: 1, column: 2 },
-    { row: 3, column: 9 },
-    { row: 4, column: 1 },
-    { row: 4, column: 3 },
-    { row: 6, column: 6 },
-    { row: 10, column: 10 },
-    { row: 11, column: 3 },
-    { row: 11, column: 8 },
-  ];
-
+  const numMines = THREE.MathUtils.randInt(8, 12);
   let numActiveCubes = 0;
   let initialClick = false;
+
+  let mines: Array<{ column: number; row: number }> = [];
+
+  for (let i = 0; i < numMines; i++) {
+    mines.push({
+      column: THREE.MathUtils.randInt(0, 11),
+      row: THREE.MathUtils.randInt(0, 11),
+    });
+  }
 
   // prepopulate mine counts matrix setting columns to 0 for each row
   const neighboringMineCounts: number[][] = [];
@@ -112,7 +110,7 @@
       THREE.MeshBasicMaterial,
       THREE.Object3DEventMap
     >[][] = [];
-    const labels: { [key: string]: number | undefined } = {};
+    const labels: { [key: string]: string | undefined } = {};
 
     const { width, height } = getCanvasDims();
     const scene = new THREE.Scene();
@@ -124,7 +122,7 @@
 
     // camera
     const camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 100);
-    camera.position.set(0, 0, 10);
+    camera.position.set(0, 0, 6);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     scene.add(camera);
 
@@ -145,8 +143,8 @@
     scene.add(boardGroup);
     const cubeGroup = new THREE.Group();
     boardGroup.add(cubeGroup);
-    const textGroup = new THREE.Group();
-    boardGroup.add(textGroup);
+    const labelGroup = new THREE.Group();
+    boardGroup.add(labelGroup);
 
     /**
      * Draw Grid
@@ -164,9 +162,9 @@
         (coords) => coords.row === row && coords.column === column,
       );
 
-      let color = column % 2 === 0 ? colors.lightGreen : colors.bitterSweet;
+      let color = column % 2 === 0 ? colors.lightGreen : colors.greenBlue;
       if (row % 2 === 0) {
-        color = column % 2 === 0 ? colors.bitterSweet : colors.lightGreen;
+        color = column % 2 === 0 ? colors.greenBlue : colors.lightGreen;
       }
 
       // uncomment to see mines
@@ -176,19 +174,45 @@
 
       const neighboringMineCount = neighboringMineCounts[row][column];
 
-      const cubeMesh = new THREE.Mesh(
+      const cube = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshBasicMaterial({ color }),
+        new THREE.MeshBasicMaterial({ color, opacity: 0.9, transparent: true }),
       );
-      cubeMesh.position.y = row;
-      cubeMesh.position.x = column;
-      cubeMesh.userData = {
+      cube.position.y = row;
+      cube.position.x = column;
+      cube.userData = {
         active: false,
         neighboringMineCount,
         mine: hasMine,
       };
-      cubes[row].push(cubeMesh);
-      cubeGroup.add(cubeMesh);
+      cubes[row].push(cube);
+      cubeGroup.add(cube);
+
+      const labelGeometry = new TextGeometry(
+        cube.userData.neighboringMineCount + "",
+        {
+          bevelEnabled: false,
+          font: new Font(typeface),
+          height: 1.05, // extrusion depth
+          size: 0.5,
+        },
+      );
+
+      labelGeometry.center();
+      const label = new THREE.Mesh(
+        labelGeometry,
+        new THREE.MeshBasicMaterial({
+          color: colors.black,
+        }),
+      );
+
+      label.position.y = row;
+      label.position.x = column;
+      label.position.z = 0.02;
+      label.visible = false;
+      labelGroup.add(label);
+      // store text id to toggle visibility later
+      labels[cube.uuid] = label.uuid;
 
       column += 1;
       if (column === COLUMNS) {
@@ -208,81 +232,49 @@
     }
 
     /**
-     *
+     * Update active state on cube and reveal count (recursive)
      * @param cube unwrapped intersection object
      * @todo clear text when it's showing on active tiles randomly
      */
     function setActive(
       cube: THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>,
     ) {
+      cube.userData.active = true;
+      // color cube for active state
+      cube.material.color.set(colors.white);
+      cube.material.opacity = 1;
+
       // check for loser
       if (cube.userData.mine) {
         revealMines();
         alert("you lose!");
         return;
       }
-      if (!cube.userData.active) {
-        numActiveCubes += 1;
-        cube.userData.active = true;
-        // color cube for active state
-        cube.material.color.set(colors.white);
 
-        // when a cube is clicked hide the neighbor mine count
-        const textId = labels[cube.uuid];
-        if (textId) {
-          const text = textGroup.getObjectById(textId);
-          if (text) {
-            text.visible = false;
+      const labelUUID = labels[cube.uuid];
+      let label = labelGroup.getObjectByProperty("uuid", labelUUID);
+      if (label && !label.visible && cube.userData.neighboringMineCount > 0) {
+        label.visible = true;
+      }
+
+      numActiveCubes += 1;
+
+      // check for winner, update cube color and hide neighbor count first
+      if (numActiveCubes === ROWS * COLUMNS - mines.length) {
+        revealMines();
+        alert("you win!");
+        return;
+      }
+
+      if (cube.userData.neighboringMineCount === 0) {
+        const coords = getNeighbors(cube.position.y, cube.position.x);
+
+        coords.forEach(({ row, column }) => {
+          const neighborCube = cubes[row][column];
+          if (!neighborCube.userData.active) {
+            setActive(neighborCube);
           }
-        }
-        // check for winner, update cube color and hide neighbor count first
-        if (numActiveCubes === ROWS * COLUMNS - mines.length) {
-          revealMines();
-          alert("you win!");
-          return;
-        }
-        if (cube.userData.neighboringMineCount === 0) {
-          const coords = getNeighbors(cube.position.y, cube.position.x);
-
-          coords.forEach(({ row, column }) => {
-            const neighborCube = cubes[row][column];
-            if (
-              neighborCube.userData.neighboringMineCount > 0 &&
-              !labels[neighborCube.uuid]
-            ) {
-              const textGeometry = new TextGeometry(
-                neighborCube.userData.neighboringMineCount + "",
-                {
-                  bevelEnabled: false,
-                  font: new Font(typeface),
-                  height: 0.1, // extrusion depth
-                  size: 0.5,
-                },
-              );
-
-              textGeometry.center();
-              const count = new THREE.Mesh(
-                textGeometry,
-                new THREE.MeshBasicMaterial({
-                  color: colors.black,
-                }),
-              );
-
-              count.position.y = row;
-              count.position.x = column;
-              count.position.z = 0.5;
-              textGroup.add(count);
-              // store text id to toggle visibility later
-              labels[neighborCube.uuid] = count.id;
-            }
-            if (
-              !neighborCube.userData.mine &&
-              neighborCube.userData.neighboringMineCount === 0
-            ) {
-              setActive(neighborCube);
-            }
-          });
-        }
+        });
       }
     }
 
@@ -338,13 +330,13 @@
 
     const controls = new OrbitControls(camera, renderer.domElement);
 
-    function animate() {
+    function render() {
       controls.update();
       renderer.render(scene, camera);
-      window.requestAnimationFrame(animate);
+      window.requestAnimationFrame(render);
     }
 
-    animate();
+    render();
   });
 </script>
 
