@@ -1,4 +1,3 @@
-<!-- @ts-check -->
 <script lang="ts">
   import { Font } from "three/examples/jsm/loaders/FontLoader";
   import { getCanvasDims } from "$lib/util";
@@ -12,7 +11,9 @@
    * Rules
    * 1. each box has a number indicating how many mines are around it, mines that are diagnal to the cube are included in this count
    * 2. if you click on a mine you loose!  when they loose the game reveals all mines
-   * 3. when a clear tile is clicked, adjuacent tiles without mines are also clearedf
+   * 3. when a clear tile is clicked, adjuacent tiles without mines are also cleared
+   * Behavior Notes
+   * * cubes with neighboring mines should show the count
    */
 
   const ROWS = 12;
