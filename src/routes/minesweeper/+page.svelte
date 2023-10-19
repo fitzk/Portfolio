@@ -27,8 +27,8 @@
 
   for (let i = 0; i < numMines; i++) {
     mines.push({
-      column: THREE.MathUtils.randInt(0, 11),
-      row: THREE.MathUtils.randInt(0, 11),
+      column: THREE.MathUtils.randInt(0, ROWS - 1),
+      row: THREE.MathUtils.randInt(0, COLUMNS - 1),
     });
   }
 
@@ -237,6 +237,9 @@
     function setActive(
       cube: THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>,
     ) {
+      if (!cube.userData.active) {
+        numActiveCubes += 1;
+      }
       cube.userData.active = true;
       // color cube for active state
       cube.material.color.set(colors.white);
@@ -249,19 +252,17 @@
         return;
       }
 
+      // check for winner
+      if (numActiveCubes === ROWS * COLUMNS - numMines + 1) {
+        revealMines();
+        alert("you win!");
+        return;
+      }
+
       const labelUUID = labels[cube.uuid];
       let label = labelGroup.getObjectByProperty("uuid", labelUUID);
       if (label && !label.visible && cube.userData.neighboringMineCount > 0) {
         label.visible = true;
-      }
-
-      numActiveCubes += 1;
-
-      // check for winner, update cube color and hide neighbor count first
-      if (numActiveCubes === ROWS * COLUMNS - mines.length) {
-        revealMines();
-        alert("you win!");
-        return;
       }
 
       if (cube.userData.neighboringMineCount === 0) {
