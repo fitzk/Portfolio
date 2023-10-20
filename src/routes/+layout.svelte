@@ -7,6 +7,8 @@
   <a href="{base}/threejs/examples">threejs</a>
   <!-- <a href="{base}/threejs/desert">desert</a> -->
   <a href="{base}/minesweeper">minesweeper</a>
+  <!-- <a href="{base}/maze">maze</a> -->
+
 
   <a target="”_blank”" href="https://github.com/fitzk">github</a>
 </nav>
