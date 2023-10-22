@@ -9,7 +9,6 @@
   <a href="{base}/minesweeper">minesweeper</a>
   <!-- <a href="{base}/maze">maze</a> -->
 
-
   <a target="”_blank”" href="https://github.com/fitzk">github</a>
 </nav>
 
