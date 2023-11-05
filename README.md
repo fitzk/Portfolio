@@ -1,4 +1,4 @@
-# Kayla's Portfolio
+# Svelte + Threejs
 
 IN PROGRESS
 
