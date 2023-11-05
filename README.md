@@ -1,9 +1,5 @@
 # Svelte + Threejs
 
-IN PROGRESS
-
-check it out here https://fitzk.github.io/Portfolio/
-
 ## Develop
 
 Once you've created a project and installed dependencies with `bun install` (or `pbun install` or `npm`), start a development server:
