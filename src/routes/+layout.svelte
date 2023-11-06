@@ -4,9 +4,9 @@
 
 <nav>
   <a href="{base}/">home</a>
-  <a href="{base}/threejs/examples">threejs</a>
+  <a href="{base}/threejs/examples">concepts</a>
   <a href="{base}/minesweeper">minesweeper</a>
-  <a target="”_blank”" href="https://github.com/fitzk">github</a>
+  <a target=”_blank” href="https://github.com/fitzk">github</a>
 </nav>
 
 <div id="content">
