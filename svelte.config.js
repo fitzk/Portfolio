@@ -13,7 +13,7 @@ const config = {
   kit: {
     adapter: adapter(),
     paths: {
-      base: process.env.NODE_ENV === "production" ? "/Portfolio" : "",
+      base: process.env.NODE_ENV === "production" ? "/SvelteThreeJS" : "",
     },
   },
   extensions: [".svelte", ".md"],
